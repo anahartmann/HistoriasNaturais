@@ -1,12 +1,88 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-
-{% include 'base.html' %}
-
-
-
-
-
+{% block titulo %}
+Index
 {% endblock %}
+
+{%block content%}
+
+<!-- Hero Section -->
+<header class="relative w-full h-[600px] flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img alt="Natureza preservada" class="w-full h-full object-cover"
+            data-alt="A breathtaking view of a dense Atlantic Forest canopy during the golden hour, with soft sunlight filtering through layers of vibrant green foliage. The scene is tranquil and majestic, showcasing the intricate textures of ferns and ancient trees in a pristine ecological sanctuary. The lighting is warm and ethereal, emphasizing the laboratory's commitment to high-end scientific conservation and professional environmental research. This visual sets a tone of trust and natural wonder for the Labeco website."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb0x8_lgxkUmMJPHDkbg3mgm1ndQZI0TRSr5Ecegn_ogqlDA8J0MPSQBjh9yGw9d5kLwBcB0z-wUh7LAYK4_zgmMcpH6oUuwoJTyyUJ3W0hIbVYR6wUoPpE-ntAbM_1gjJ2coYWauWyh2BXgzeGWh6P3bKjZmwABDP_4YcxQ9xtul2lOPqAZZvG4Iw9gCKVxizMyaJ0lIHMX5b7bQm6kMx36T_oooMjuVnuKLEA5tKNOVYwWWzD44E3jeZB62ed2yxGGjWTz-w1eQ">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent"></div>
+    </div>
+    <div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+        <div class="max-w-2xl text-on-primary">
+            <h1 class="font-display-lg text-display-lg mb-md leading-tight">Ciência a serviço da conservação ambiental
+            </h1>
+            <p class="font-body-lg text-body-lg mb-lg opacity-90">O Laboratório de Ecologia e Conservação (Labeco) da
+                UFFS
+                Campus Erechim dedica-se ao estudo da biodiversidade e ao desenvolvimento de estratégias para a
+                preservação
+                dos nossos ecossistemas.</p>
+            <div class="flex flex-wrap gap-sm">
+                <a class="bg-secondary-container text-on-secondary-container px-lg py-md rounded-full font-label-md text-label-md hover:brightness-95 transition-all"
+                    href="{% url 'fauna' %}">Explorar
+                    Acervo</a>
+                <a class="border border-on-primary text-on-primary px-lg py-md rounded-full font-label-md text-label-md hover:bg-on-primary/10 transition-all"
+                    href="{% url 'publicacoes' %}">Nossas
+                    Pesquisas</a>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- About Lab Summary -->
+
+<!-- Bento Grid Highlight Section -->
+<section class="py-xl transition-all duration-700 opacity-100 translate-y-0">
+    <div class="px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+
+        <div class="grid md:grid-cols-12 gap-md auto-rows-[250px]">
+            <!-- Fauna Card -->
+            <div class="md:col-span-8 group relative overflow-hidden rounded-xl border border-outline-variant bg-white">
+                <img alt="Fauna regional"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    data-alt="A detailed, professional wildlife photograph of a South American coati foraging in a sun-dappled forest floor. The animal is in sharp focus, showcasing its textured fur and inquisitive expression, while the background consists of soft, blurred greenery characteristic of a temperate forest. The lighting is natural and crisp, emphasizing the biological diversity and research focus of the Labeco laboratory in a clean, modern aesthetic."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1LT3u9DoHxFiwgBUJjxgovOVMJTsdzi0Jc4KPJ3JNAvfY5PRmHsoj_9fAX51fP0zMiDIodoF68_GS1XdxYPbdGzcCvTGdlvSDeiTASebgAIbuoKPL_JTE7XWHDmlSjJiZjSh6RXH6iVy9RyriwagjcZOrBBti2gvSUNgwZEZIZAVuBoomRt-gUWAOSw8DcfDv20BE3jmfgSFI_tCeIwK40lUFdJ7yx-SUyg58PeCxyuAbRFTskTfdIElgjJrH8Q5VCvwWeFmGAbQ">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-md text-on-primary">
+                    <h3 class="font-headline-sm text-headline-sm mb-xs">Acervo de Fauna</h3>
+                    <p class="font-body-md text-body-md opacity-90 max-w-lg mb-sm">Acesse nosso banco de dados detalhado
+                        sobre a biodiversidade local, incluindo registros fotográficos e dados taxonômicos.</p>
+                    <a class="inline-flex items-center gap-xs font-label-md text-label-md hover:underline"
+                        href="{% url 'fauna' %}">
+                        Ver acervo completo <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Publications Card -->
+            <div
+                class="md:col-span-4 p-md bg-white border border-outline-variant rounded-xl flex flex-col justify-between">
+                <div>
+                    <div
+                        class="w-12 h-9 bg-primary-fixed rounded-full flex items-center justify-center text-primary mb-md">
+                        <span class="material-symbols-outlined">article</span>
+                    </div>
+                    <h3 class="font-headline-sm text-headline-sm text-primary mb-sm">Publicações Científicas</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Nossos artigos, teses e relatórios
+                        técnicos disponíveis para a comunidade acadêmica e interessados.</p>
+                </div>
+
+                <a class="w-full  text-primary py-xs rounded-full font-label-md text-label-md hover:bg-primary/5 transition-colors"
+                    href="{% url 'publicacoes' %}">
+                    Ver todas
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock%}

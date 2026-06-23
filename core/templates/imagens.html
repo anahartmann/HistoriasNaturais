@@ -1,477 +1,261 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Acervo de Fauna | Labeco - UFFS</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Source+Serif+4:ital,wght@0,600;0,700;1,400&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+{% block titulo %}
+Acervo
+{% endblock %}
 
-        .active-filter {
-            background-color: #cee9d3;
-            /* tertiary-fixed */
-            color: #152b1c;
-            /* tertiary */
-        }
+{% include 'base.html' %}
 
-        .card-shadow {
-            box-shadow: 0px 4px 20px rgba(27, 67, 50, 0.08);
-        }
-
-        body {
-            font-family: 'Hanken Grotesk', sans-serif;
-            background-color: #faf8ff;
-        }
-    </style>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface": "#faf8ff",
-                        "surface-tint": "#3f6653",
-                        "outline-variant": "#c1c8c2",
-                        "background": "#faf8ff",
-                        "surface-container-lowest": "#ffffff",
-                        "inverse-primary": "#a5d0b9",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed": "#a1f4c8",
-                        "error": "#ba1a1a",
-                        "primary": "#012d1d",
-                        "tertiary-fixed-dim": "#b3cdb7",
-                        "on-surface": "#171b2b",
-                        "surface-dim": "#d6d9ef",
-                        "outline": "#717973",
-                        "on-tertiary-fixed": "#092012",
-                        "on-tertiary": "#ffffff",
-                        "on-secondary-fixed-variant": "#005236",
-                        "on-tertiary-container": "#93ad98",
-                        "surface-bright": "#faf8ff",
-                        "secondary-fixed-dim": "#86d7ad",
-                        "on-error-container": "#93000a",
-                        "inverse-surface": "#2c3041",
-                        "surface-variant": "#dee1f8",
-                        "on-primary-container": "#86af99",
-                        "secondary-container": "#a1f4c8",
-                        "on-primary": "#ffffff",
-                        "surface-container-high": "#e4e7fe",
-                        "inverse-on-surface": "#eff0ff",
-                        "on-secondary-fixed": "#002113",
-                        "on-background": "#171b2b",
-                        "primary-fixed": "#c1ecd4",
-                        "on-tertiary-fixed-variant": "#354c3b",
-                        "surface-container": "#ebedff",
-                        "tertiary-fixed": "#cee9d3",
-                        "surface-container-highest": "#dee1f8",
-                        "on-surface-variant": "#414844",
-                        "tertiary-container": "#2a4131",
-                        "on-secondary-container": "#1b724f",
-                        "on-secondary": "#ffffff",
-                        "tertiary": "#152b1c",
-                        "primary-fixed-dim": "#a5d0b9",
-                        "on-primary-fixed": "#002114",
-                        "secondary": "#116c4a",
-                        "primary-container": "#1b4332",
-                        "surface-container-low": "#f3f2ff",
-                        "on-error": "#ffffff",
-                        "on-primary-fixed-variant": "#274e3d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "sm": "16px",
-                        "margin-desktop": "auto",
-                        "gutter": "24px",
-                        "base": "4px",
-                        "xs": "8px",
-                        "xl": "80px",
-                        "lg": "48px",
-                        "md": "24px",
-                        "max-width": "1200px",
-                        "margin-mobile": "16px"
-                    },
-                    "fontFamily": {
-                        "display-lg-mobile": ["Source Serif 4"],
-                        "body-md": ["Hanken Grotesk"],
-                        "label-md": ["Hanken Grotesk"],
-                        "headline-sm": ["Source Serif 4"],
-                        "body-lg": ["Hanken Grotesk"],
-                        "display-lg": ["Source Serif 4"],
-                        "caption": ["Hanken Grotesk"],
-                        "headline-md": ["Source Serif 4"]
-                    },
-                    "fontSize": {
-                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
-                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
-                    }
-                },
-            },
-        }
-    </script>
-</head>
-
-<body class="bg-surface text-on-surface antialiased">
-    <!-- TopNavBar -->
-    <nav class="bg-surface border-b border-outline-variant sticky top-0 z-50">
-        <div
-            class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
-            <div class="font-headline-md text-headline-md font-bold text-primary">Labeco</div>
-            <div class="hidden md:flex gap-md items-center">
-                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-                    href="#">Início</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-                    href="#">Sobre</a>
-                <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md"
-                    href="#">Fauna</a>
-                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-                    href="#">Publicações</a>
+{%block content%}
+<main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-xl min-h-screen">
+    <!-- Header Section -->
+    <header class="mb-lg">
+        <h1 class="font-display-lg text-display-lg text-primary mb-xs">Acervo de Fauna</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+            Explore o registro fotográfico e videográfico das espécies catalogadas pelo Labeco na região do Alto
+            Uruguai. Um repositório para ciência e conservação.
+        </p>
+    </header>
+    <div class="flex flex-col lg:flex-row gap-gutter">
+        <!-- Sidebar / Filters -->
+        <aside class="w-full lg:w-1/4 space-y-md">
+            <div class="bg-surface-container-lowest p-sm border border-outline-variant rounded-xl">
+                <h3 class="font-label-md text-label-md text-primary mb-sm uppercase tracking-wider">Filtros
+                    Avançados</h3>
+                <div class="space-y-sm">
+                    <!-- Taxon Filter -->
+                    <div>
+                        <label class="block font-caption text-caption text-on-surface-variant mb-1">Grupo
+                            Taxonômico</label>
+                        <div class="flex flex-wrap gap-xs">
+                            <button
+                                class="px-3 py-1 rounded-full border border-outline-variant text-xs active-filter">Todos</button>
+                            <button
+                                class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Mamíferos</button>
+                            <button
+                                class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Aves</button>
+                            <button
+                                class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Répteis</button>
+                            <button
+                                class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Anfíbios</button>
+                        </div>
+                    </div>
+                    <!-- Phenomenon Filter -->
+                    <div>
+                        <label class="block font-caption text-caption text-on-surface-variant mb-1">Fenômeno</label>
+                        <select
+                            class="w-full bg-surface border-outline-variant rounded-lg text-sm focus:border-secondary focus:ring-secondary">
+                            <option>Qualquer fenômeno</option>
+                            <option>Alimentação</option>
+                            <option>Reprodução</option>
+                            <option>Deslocamento</option>
+                            <option>Comportamento Social</option>
+                        </select>
+                    </div>
+                    <!-- Location Filter -->
+                    <div>
+                        <label class="block font-caption text-caption text-on-surface-variant mb-1">Localidade</label>
+                        <select
+                            class="w-full bg-surface border-outline-variant rounded-lg text-sm focus:border-secondary focus:ring-secondary">
+                            <option>Todas as áreas</option>
+                            <option>Erechim (Campus UFFS)</option>
+                            <option>Reserva Legal</option>
+                            <option>Mata Atlântica</option>
+                        </select>
+                    </div>
+                    <button
+                        class="w-full bg-primary-container text-on-primary-container py-2 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors mt-md">
+                        Limpar Filtros
+                    </button>
+                </div>
             </div>
-            <div class="flex items-center gap-sm">
-
+            <div class="hidden lg:block bg-tertiary-fixed p-sm rounded-xl border border-on-tertiary-container">
+                <span class="material-symbols-outlined text-tertiary mb-xs">info</span>
+                <p class="font-caption text-caption text-on-tertiary-fixed-variant leading-relaxed">
+                    Os registros são parte de projetos de monitoramento contínuo utilizando armadilhas fotográficas
+                    e observação direta.
+                </p>
+            </div>
+        </aside>
+        <!-- Gallery Grid -->
+        <section class="w-full lg:w-3/4">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-md">
+                <!-- Card 1 -->
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer"
+                    onclick="openDetails('Cerdocyon thous', 'Graxaim-do-mato', 'Mamíferos', 'Deslocamento Noturno', 'Erechim - Campus UFFS')">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            data-alt="A detailed scientific photograph of a Crab-eating Fox (Cerdocyon thous) walking through dense tropical undergrowth at night. The lighting is low-key, captured by a high-definition wildlife camera trap, highlighting the greyish fur and bushy tail. The environment is rich with Brazilian Atlantic Forest flora, rendered in a professional, research-oriented style with a deep green and earthy color palette."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuATlehyxqHZODd4S6-xQfF6xtR0GeQVO8WIT2FIEmRpaX8aZeFL3frLzwjM6H9xz3AVEvgkDjjJiSzCWKFx3rUQrK8HApCb6UY0X3yuiHr4aJss1adU8PN-bI-iReSOqP3RFJn5bXxrQwnczCyQOsvTO_5N2DC37pPXGtxvYVHDBrVrxu4qfL7gi9nVNlRkUMvVxfo-rlGncN3jpHjnOLIh51_if0F7vaGy7hssqqAJy64I1qEWzvMOs-qNdS8LafBnAXXp3cCJQxA">
+                        <div
+                            class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]" data-weight="fill">videocam</span>
+                            VÍDEO DISPONÍVEL
+                        </div>
+                    </div>
+                    <div class="p-md">
+                        <h4 class="font-headline-sm text-headline-sm text-primary">Graxaim-do-mato</h4>
+                        <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Cerdocyon thous
+                        </p>
+                        <div class="flex gap-xs mt-sm">
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Mamíferos</span>
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Noturno</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            data-alt="A high-resolution nature photograph of a Southern Lapwing (Vanellus chilensis) standing on a dewy green lawn in the early morning light. The bird's distinctive plumage and sharp red eyes are perfectly in focus. The background shows a soft, blurred landscape of a Brazilian university campus with minimalist architecture. The atmosphere is serene, bright, and academic, using a professional light-mode aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuNStODfKmPdT6j0GU_s_TjSzqwsjELCGTvL9yVTrpwt41NDY_j6vPbnEJbbF7Rm7ZJqVN9H29DHdTZu5jmXeoOsOle_Nplq4YwA8SqFU2l5eZvVjXTKF6FpKPYTEgeTrYosTK_ZNxZSUr80m-zmweDr753x3NCwB2TdQzndLHLTBllg3Gzz7FwwR1YrALXthblL_FOoarsTjbTfBoXGSOwzFHJht8bsKRaeSvnMSGgJ6m7pNZfZJa_uQKhVYi7b9hHWiCpn75NQQ">
+                        <div
+                            class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]" data-weight="fill">image</span> FOTO
+                        </div>
+                    </div>
+                    <div class="p-md">
+                        <h4 class="font-headline-sm text-headline-sm text-primary">Quero-quero</h4>
+                        <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Vanellus chilensis
+                        </p>
+                        <div class="flex gap-xs mt-sm">
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Aves</span>
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Vocalização</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            data-alt="A professional biological study photograph of a Black-tufted Marmoset (Callithrix penicillata) clinging to a tree trunk in a semi-urban forest environment. The lighting is soft and diffused, filtering through the tree canopy. The image emphasizes the textures of the primate's fur and the tree's bark. The color palette is dominated by organic greens and browns, maintaining a clean and minimalist academic aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCRKZRQsY5Ul08TqqpZtaIVeMw7MLmG-kKzbtnZlRDeY05r2JiFEpGzHBwcZP2cWMLNlTbOzwLZe3a1qbJkZdAUS593aXOom7fzra6hYO5j8QdeIx_Dc-ekzg3sTTUHmF3PQViIxbo4opZC58r8xolLGKWXYGqPneP4vhXuRoeIehXKEnuBl2rTML8rF9JOtZVxwMiImRdTiPHdt9f3mjwWqPfWcsVgdIwF4CGiWxerods5nSH4Lj5XeYO7O7IeG77c9IM9ieKVl4">
+                        <div
+                            class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]" data-weight="fill">videocam</span>
+                            VÍDEO
+                        </div>
+                    </div>
+                    <div class="p-md">
+                        <h4 class="font-headline-sm text-headline-sm text-primary">Mico-estrela</h4>
+                        <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Callithrix
+                            penicillata</p>
+                        <div class="flex gap-xs mt-sm">
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Mamíferos</span>
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Alimentação</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            data-alt="A clean, scientific macro photograph of a Southern Amazon Tree Frog (Boana cinerascens) perched on a vibrant green leaf. The lighting is bright and clear, highlighting the translucent quality of the frog's skin and the intricate veins of the leaf. The background is a soft, out-of-focus green, evoking a pristine natural habitat. The overall style is professional and highly detailed for scientific documentation."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpzEowdJ8HVYHlNmvEf8fNfr8gZp9dE387GDBOc4JTC1A28AFnhc67eKS8Ne0cLEXhIwbJXBVt_PaOK7QTMYcG2UeuPnaWbZkb3QrRqTP6ZAb3ldb0R3nNZyU_vDznQbj9xaCr4fqUzIqS--kSu_vRpVFPMBGdw_a2QoYslQpaAsZusVFS1-6zf5FMEq5L9DwV9Y54xNjCp5bMg1UwL-ikj1agGD63kVKq2TJhL3-bS-WDJM3Jv34q5UT1-RQx7UJ-LfFRs_fHLAM">
+                        <div
+                            class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]" data-weight="fill">image</span> FOTO
+                        </div>
+                    </div>
+                    <div class="p-md">
+                        <h4 class="font-headline-sm text-headline-sm text-primary">Perereca-verde</h4>
+                        <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Boana sp.</p>
+                        <div class="flex gap-xs mt-sm">
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Anfíbios</span>
+                            <span
+                                class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Microhabitat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-lg flex justify-center items-center gap-xs">
                 <button
-                    class="bg-primary text-on-primary px-sm py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
-                    Acesso Restrito
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">2</button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">3</button>
+                <span class="mx-2">...</span>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_right</span>
                 </button>
             </div>
-        </div>
-    </nav>
-    <main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-xl min-h-screen">
-        <!-- Header Section -->
-        <header class="mb-lg">
-            <h1 class="font-display-lg text-display-lg text-primary mb-xs">Acervo de Fauna</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Explore o registro fotográfico e videográfico das espécies catalogadas pelo Labeco na região do Alto
-                Uruguai. Um repositório para ciência e conservação.
-            </p>
-        </header>
-        <div class="flex flex-col lg:flex-row gap-gutter">
-            <!-- Sidebar / Filters -->
-            <aside class="w-full lg:w-1/4 space-y-md">
-                <div class="bg-surface-container-lowest p-sm border border-outline-variant rounded-xl">
-                    <h3 class="font-label-md text-label-md text-primary mb-sm uppercase tracking-wider">Filtros
-                        Avançados</h3>
-                    <div class="space-y-sm">
-                        <!-- Taxon Filter -->
+        </section>
+    </div>
+</main>
+<!-- Details Modal (Simplified logic for design) -->
+<div class="fixed inset-0 z-[60] bg-black/60 hidden items-center justify-center p-md" id="details-modal">
+    <div
+        class="bg-surface-container-lowest w-full max-w-2xl rounded-xl overflow-hidden relative card-shadow border border-outline-variant">
+        <button class="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white transition-colors z-10"
+            onclick="closeDetails()">
+            <span class="material-symbols-outlined text-primary">close</span>
+        </button>
+        <div class="flex flex-col md:flex-row h-full">
+            <div class="w-full md:w-1/2 aspect-square md:aspect-auto">
+                <img class="w-full h-full object-cover"
+                    data-alt="A detailed scientific photograph of a Crab-eating Fox (Cerdocyon thous) walking through dense tropical undergrowth at night. The lighting is low-key, captured by a high-definition wildlife camera trap, highlighting the greyish fur and bushy tail. The environment is rich with Brazilian Atlantic Forest flora, rendered in a professional, research-oriented style with a deep green and earthy color palette."
+                    id="modal-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf_oTDTpKqtI56zASroXsxvdOBNDX_WZAMSp9oytZgiMWt6HK_uBdUUWhck0o6D9O05u2M7wXzYGEeGSoC8_xtgjijIWrb4j8LiOLMrEQiQaEs-mCza4YwVOpzFeDvcwcEHQGwwUDly-yYBvha_94JTv_0erz5Tj6leejRsJuV_Ky26QQeTr6W9UHEWzWds_E_H008SFdURiRZ4ro-PbT1--zjBVtzgMcAphE0vILZnZm6InEdpVT5wJlL0IRxIQEqGSq2d2iF9LY">
+            </div>
+            <div class="p-lg flex-1">
+                <span class="text-secondary font-bold text-xs uppercase tracking-widest block mb-2"
+                    id="modal-taxon">Mamíferos</span>
+                <h2 class="font-display-lg text-headline-md text-primary mb-1" id="modal-common-name">
+                    Graxaim-do-mato</h2>
+                <p class="font-body-lg text-body-lg italic text-on-surface-variant mb-md" id="modal-sci-name">
+                    Cerdocyon thous</p>
+                <div class="space-y-sm">
+                    <div class="flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary-container text-[20px]">psychology</span>
                         <div>
-                            <label class="block font-caption text-caption text-on-surface-variant mb-1">Grupo
-                                Taxonômico</label>
-                            <div class="flex flex-wrap gap-xs">
-                                <button
-                                    class="px-3 py-1 rounded-full border border-outline-variant text-xs active-filter">Todos</button>
-                                <button
-                                    class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Mamíferos</button>
-                                <button
-                                    class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Aves</button>
-                                <button
-                                    class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Répteis</button>
-                                <button
-                                    class="px-3 py-1 rounded-full border border-outline-variant text-xs hover:bg-surface-container">Anfíbios</button>
-                            </div>
+                            <p class="text-[10px] uppercase font-bold text-on-surface-variant">Fenômeno</p>
+                            <p class="text-sm font-body-md text-on-surface" id="modal-phenomenon">Deslocamento
+                                Noturno</p>
                         </div>
-                        <!-- Phenomenon Filter -->
+                    </div>
+                    <div class="flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary-container text-[20px]">location_on</span>
                         <div>
-                            <label class="block font-caption text-caption text-on-surface-variant mb-1">Fenômeno</label>
-                            <select
-                                class="w-full bg-surface border-outline-variant rounded-lg text-sm focus:border-secondary focus:ring-secondary">
-                                <option>Qualquer fenômeno</option>
-                                <option>Alimentação</option>
-                                <option>Reprodução</option>
-                                <option>Deslocamento</option>
-                                <option>Comportamento Social</option>
-                            </select>
+                            <p class="text-[10px] uppercase font-bold text-on-surface-variant">Local</p>
+                            <p class="text-sm font-body-md text-on-surface" id="modal-location">Erechim - Campus
+                                UFFS</p>
                         </div>
-                        <!-- Location Filter -->
+                    </div>
+                    <div class="flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary-container text-[20px]">calendar_today</span>
                         <div>
-                            <label
-                                class="block font-caption text-caption text-on-surface-variant mb-1">Localidade</label>
-                            <select
-                                class="w-full bg-surface border-outline-variant rounded-lg text-sm focus:border-secondary focus:ring-secondary">
-                                <option>Todas as áreas</option>
-                                <option>Erechim (Campus UFFS)</option>
-                                <option>Reserva Legal</option>
-                                <option>Mata Atlântica</option>
-                            </select>
-                        </div>
-                        <button
-                            class="w-full bg-primary-container text-on-primary-container py-2 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors mt-md">
-                            Limpar Filtros
-                        </button>
-                    </div>
-                </div>
-                <div class="hidden lg:block bg-tertiary-fixed p-sm rounded-xl border border-on-tertiary-container">
-                    <span class="material-symbols-outlined text-tertiary mb-xs">info</span>
-                    <p class="font-caption text-caption text-on-tertiary-fixed-variant leading-relaxed">
-                        Os registros são parte de projetos de monitoramento contínuo utilizando armadilhas fotográficas
-                        e observação direta.
-                    </p>
-                </div>
-            </aside>
-            <!-- Gallery Grid -->
-            <section class="w-full lg:w-3/4">
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-md">
-                    <!-- Card 1 -->
-                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer"
-                        onclick="openDetails('Cerdocyon thous', 'Graxaim-do-mato', 'Mamíferos', 'Deslocamento Noturno', 'Erechim - Campus UFFS')">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="A detailed scientific photograph of a Crab-eating Fox (Cerdocyon thous) walking through dense tropical undergrowth at night. The lighting is low-key, captured by a high-definition wildlife camera trap, highlighting the greyish fur and bushy tail. The environment is rich with Brazilian Atlantic Forest flora, rendered in a professional, research-oriented style with a deep green and earthy color palette."
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuATlehyxqHZODd4S6-xQfF6xtR0GeQVO8WIT2FIEmRpaX8aZeFL3frLzwjM6H9xz3AVEvgkDjjJiSzCWKFx3rUQrK8HApCb6UY0X3yuiHr4aJss1adU8PN-bI-iReSOqP3RFJn5bXxrQwnczCyQOsvTO_5N2DC37pPXGtxvYVHDBrVrxu4qfL7gi9nVNlRkUMvVxfo-rlGncN3jpHjnOLIh51_if0F7vaGy7hssqqAJy64I1qEWzvMOs-qNdS8LafBnAXXp3cCJQxA">
-                            <div
-                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[12px]" data-weight="fill">videocam</span>
-                                VÍDEO DISPONÍVEL
-                            </div>
-                        </div>
-                        <div class="p-md">
-                            <h4 class="font-headline-sm text-headline-sm text-primary">Graxaim-do-mato</h4>
-                            <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Cerdocyon thous
-                            </p>
-                            <div class="flex gap-xs mt-sm">
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Mamíferos</span>
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Noturno</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="A high-resolution nature photograph of a Southern Lapwing (Vanellus chilensis) standing on a dewy green lawn in the early morning light. The bird's distinctive plumage and sharp red eyes are perfectly in focus. The background shows a soft, blurred landscape of a Brazilian university campus with minimalist architecture. The atmosphere is serene, bright, and academic, using a professional light-mode aesthetic."
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuNStODfKmPdT6j0GU_s_TjSzqwsjELCGTvL9yVTrpwt41NDY_j6vPbnEJbbF7Rm7ZJqVN9H29DHdTZu5jmXeoOsOle_Nplq4YwA8SqFU2l5eZvVjXTKF6FpKPYTEgeTrYosTK_ZNxZSUr80m-zmweDr753x3NCwB2TdQzndLHLTBllg3Gzz7FwwR1YrALXthblL_FOoarsTjbTfBoXGSOwzFHJht8bsKRaeSvnMSGgJ6m7pNZfZJa_uQKhVYi7b9hHWiCpn75NQQ">
-                            <div
-                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[12px]" data-weight="fill">image</span> FOTO
-                            </div>
-                        </div>
-                        <div class="p-md">
-                            <h4 class="font-headline-sm text-headline-sm text-primary">Quero-quero</h4>
-                            <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Vanellus chilensis
-                            </p>
-                            <div class="flex gap-xs mt-sm">
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Aves</span>
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Vocalização</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div
-                        class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="A professional biological study photograph of a Black-tufted Marmoset (Callithrix penicillata) clinging to a tree trunk in a semi-urban forest environment. The lighting is soft and diffused, filtering through the tree canopy. The image emphasizes the textures of the primate's fur and the tree's bark. The color palette is dominated by organic greens and browns, maintaining a clean and minimalist academic aesthetic."
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCRKZRQsY5Ul08TqqpZtaIVeMw7MLmG-kKzbtnZlRDeY05r2JiFEpGzHBwcZP2cWMLNlTbOzwLZe3a1qbJkZdAUS593aXOom7fzra6hYO5j8QdeIx_Dc-ekzg3sTTUHmF3PQViIxbo4opZC58r8xolLGKWXYGqPneP4vhXuRoeIehXKEnuBl2rTML8rF9JOtZVxwMiImRdTiPHdt9f3mjwWqPfWcsVgdIwF4CGiWxerods5nSH4Lj5XeYO7O7IeG77c9IM9ieKVl4">
-                            <div
-                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[12px]" data-weight="fill">videocam</span>
-                                VÍDEO
-                            </div>
-                        </div>
-                        <div class="p-md">
-                            <h4 class="font-headline-sm text-headline-sm text-primary">Mico-estrela</h4>
-                            <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Callithrix
-                                penicillata</p>
-                            <div class="flex gap-xs mt-sm">
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Mamíferos</span>
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Alimentação</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div
-                        class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="A clean, scientific macro photograph of a Southern Amazon Tree Frog (Boana cinerascens) perched on a vibrant green leaf. The lighting is bright and clear, highlighting the translucent quality of the frog's skin and the intricate veins of the leaf. The background is a soft, out-of-focus green, evoking a pristine natural habitat. The overall style is professional and highly detailed for scientific documentation."
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpzEowdJ8HVYHlNmvEf8fNfr8gZp9dE387GDBOc4JTC1A28AFnhc67eKS8Ne0cLEXhIwbJXBVt_PaOK7QTMYcG2UeuPnaWbZkb3QrRqTP6ZAb3ldb0R3nNZyU_vDznQbj9xaCr4fqUzIqS--kSu_vRpVFPMBGdw_a2QoYslQpaAsZusVFS1-6zf5FMEq5L9DwV9Y54xNjCp5bMg1UwL-ikj1agGD63kVKq2TJhL3-bS-WDJM3Jv34q5UT1-RQx7UJ-LfFRs_fHLAM">
-                            <div
-                                class="absolute bottom-2 left-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-primary flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[12px]" data-weight="fill">image</span> FOTO
-                            </div>
-                        </div>
-                        <div class="p-md">
-                            <h4 class="font-headline-sm text-headline-sm text-primary">Perereca-verde</h4>
-                            <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">Boana sp.</p>
-                            <div class="flex gap-xs mt-sm">
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Anfíbios</span>
-                                <span
-                                    class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">Microhabitat</span>
-                            </div>
+                            <p class="text-[10px] uppercase font-bold text-on-surface-variant">Data do Registro</p>
+                            <p class="text-sm font-body-md text-on-surface">14 de Setembro de 2023</p>
                         </div>
                     </div>
                 </div>
-                <!-- Pagination -->
-                <div class="mt-lg flex justify-center items-center gap-xs">
+                <div class="mt-lg pt-md border-t border-outline-variant flex gap-sm">
                     <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
-                        <span class="material-symbols-outlined">chevron_left</span>
+                        class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">download</span> Baixar Dataset
                     </button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">2</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">3</button>
-                    <span class="mx-2">...</span>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
-                        <span class="material-symbols-outlined">chevron_right</span>
-                    </button>
-                </div>
-            </section>
-        </div>
-    </main>
-    <!-- Details Modal (Simplified logic for design) -->
-    <div class="fixed inset-0 z-[60] bg-black/60 hidden items-center justify-center p-md" id="details-modal">
-        <div
-            class="bg-surface-container-lowest w-full max-w-2xl rounded-xl overflow-hidden relative card-shadow border border-outline-variant">
-            <button class="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white transition-colors z-10"
-                onclick="closeDetails()">
-                <span class="material-symbols-outlined text-primary">close</span>
-            </button>
-            <div class="flex flex-col md:flex-row h-full">
-                <div class="w-full md:w-1/2 aspect-square md:aspect-auto">
-                    <img class="w-full h-full object-cover"
-                        data-alt="A detailed scientific photograph of a Crab-eating Fox (Cerdocyon thous) walking through dense tropical undergrowth at night. The lighting is low-key, captured by a high-definition wildlife camera trap, highlighting the greyish fur and bushy tail. The environment is rich with Brazilian Atlantic Forest flora, rendered in a professional, research-oriented style with a deep green and earthy color palette."
-                        id="modal-img"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf_oTDTpKqtI56zASroXsxvdOBNDX_WZAMSp9oytZgiMWt6HK_uBdUUWhck0o6D9O05u2M7wXzYGEeGSoC8_xtgjijIWrb4j8LiOLMrEQiQaEs-mCza4YwVOpzFeDvcwcEHQGwwUDly-yYBvha_94JTv_0erz5Tj6leejRsJuV_Ky26QQeTr6W9UHEWzWds_E_H008SFdURiRZ4ro-PbT1--zjBVtzgMcAphE0vILZnZm6InEdpVT5wJlL0IRxIQEqGSq2d2iF9LY">
-                </div>
-                <div class="p-lg flex-1">
-                    <span class="text-secondary font-bold text-xs uppercase tracking-widest block mb-2"
-                        id="modal-taxon">Mamíferos</span>
-                    <h2 class="font-display-lg text-headline-md text-primary mb-1" id="modal-common-name">
-                        Graxaim-do-mato</h2>
-                    <p class="font-body-lg text-body-lg italic text-on-surface-variant mb-md" id="modal-sci-name">
-                        Cerdocyon thous</p>
-                    <div class="space-y-sm">
-                        <div class="flex items-center gap-xs">
-                            <span class="material-symbols-outlined text-primary-container text-[20px]">psychology</span>
-                            <div>
-                                <p class="text-[10px] uppercase font-bold text-on-surface-variant">Fenômeno</p>
-                                <p class="text-sm font-body-md text-on-surface" id="modal-phenomenon">Deslocamento
-                                    Noturno</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-xs">
-                            <span
-                                class="material-symbols-outlined text-primary-container text-[20px]">location_on</span>
-                            <div>
-                                <p class="text-[10px] uppercase font-bold text-on-surface-variant">Local</p>
-                                <p class="text-sm font-body-md text-on-surface" id="modal-location">Erechim - Campus
-                                    UFFS</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-xs">
-                            <span
-                                class="material-symbols-outlined text-primary-container text-[20px]">calendar_today</span>
-                            <div>
-                                <p class="text-[10px] uppercase font-bold text-on-surface-variant">Data do Registro</p>
-                                <p class="text-sm font-body-md text-on-surface">14 de Setembro de 2023</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-lg pt-md border-t border-outline-variant flex gap-sm">
-                        <button
-                            class="flex-1 bg-primary text-on-primary py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-[18px]">download</span> Baixar Dataset
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer -->
-    <footer
-        class="bg-primary text-on-primary w-full py-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-sm mt-xl">
-        <div class="flex flex-col items-center md:items-start">
-            <div class="font-headline-sm text-headline-sm text-on-primary mb-xs">Labeco</div>
-            <p class="font-caption text-caption text-on-primary-container opacity-80 max-w-xs text-center md:text-left">
-                © Labeco - UFFS Campus Erechim. Ciência e Conservação.
-            </p>
-        </div>
-        <div class="flex gap-md">
-            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-label-md text-label-md"
-                href="#">Privacidade</a>
-            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-label-md text-label-md"
-                href="#">Contato</a>
-            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-label-md text-label-md"
-                href="#">UFFS</a>
-        </div>
-        <div class="flex gap-sm">
-            <div
-                class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                <span class="material-symbols-outlined text-[20px]">language</span>
-            </div>
-            <div
-                class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                <span class="material-symbols-outlined text-[20px]">mail</span>
-            </div>
-        </div>
-    </footer>
-    <script>
-        function openDetails(sciName, commonName, taxon, phenom, loc) {
-            document.getElementById('modal-sci-name').innerText = sciName;
-            document.getElementById('modal-common-name').innerText = commonName;
-            document.getElementById('modal-taxon').innerText = taxon;
-            document.getElementById('modal-phenomenon').innerText = phenom;
-            document.getElementById('modal-location').innerText = loc;
+</div>
 
-            const modal = document.getElementById('details-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeDetails() {
-            const modal = document.getElementById('details-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on escape key
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeDetails();
-        });
-
-        // Close modal on background click
-        document.getElementById('details-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'details-modal') closeDetails();
-        });
-    </script>
-
-
-</body>
-
-</html>
+{% endblock %}

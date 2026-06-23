@@ -1,299 +1,223 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html class="light" lang="pt-BR" style="">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Labeco - Ecologia e Conservação</title>
-  <!-- Material Symbols -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet">
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap"
-    rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          "colors": {
-            "surface": "#faf8ff",
-            "surface-tint": "#3f6653",
-            "outline-variant": "#c1c8c2",
-            "background": "#faf8ff",
-            "surface-container-lowest": "#ffffff",
-            "inverse-primary": "#a5d0b9",
-            "error-container": "#ffdad6",
-            "secondary-fixed": "#a1f4c8",
-            "error": "#ba1a1a",
-            "primary": "#012d1d",
-            "tertiary-fixed-dim": "#b3cdb7",
-            "on-surface": "#171b2b",
-            "surface-dim": "#d6d9ef",
-            "outline": "#717973",
-            "on-tertiary-fixed": "#092012",
-            "on-tertiary": "#ffffff",
-            "on-secondary-fixed-variant": "#005236",
-            "on-tertiary-container": "#93ad98",
-            "surface-bright": "#faf8ff",
-            "secondary-fixed-dim": "#86d7ad",
-            "on-error-container": "#93000a",
-            "inverse-surface": "#2c3041",
-            "surface-variant": "#dee1f8",
-            "on-primary-container": "#86af99",
-            "secondary-container": "#a1f4c8",
-            "on-primary": "#ffffff",
-            "surface-container-high": "#e4e7fe",
-            "inverse-on-surface": "#eff0ff",
-            "on-secondary-fixed": "#002113",
-            "on-background": "#171b2b",
-            "primary-fixed": "#c1ecd4",
-            "on-tertiary-fixed-variant": "#354c3b",
-            "surface-container": "#ebedff",
-            "tertiary-fixed": "#cee9d3",
-            "surface-container-highest": "#dee1f8",
-            "on-surface-variant": "#414844",
-            "tertiary-container": "#2a4131",
-            "on-secondary-container": "#1b724f",
-            "on-secondary": "#ffffff",
-            "tertiary": "#152b1c",
-            "primary-fixed-dim": "#a5d0b9",
-            "on-primary-fixed": "#002114",
-            "secondary": "#116c4a",
-            "primary-container": "#1b4332",
-            "surface-container-low": "#f3f2ff",
-            "on-error": "#ffffff",
-            "on-primary-fixed-variant": "#274e3d"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.125rem",
-            "lg": "0.25rem",
-            "xl": "0.5rem",
-            "full": "0.75rem"
-          },
-          "spacing": {
-            "sm": "16px",
-            "margin-desktop": "auto",
-            "gutter": "24px",
-            "base": "4px",
-            "xs": "8px",
-            "xl": "80px",
-            "lg": "48px",
-            "md": "24px",
-            "max-width": "1200px",
-            "margin-mobile": "16px"
-          },
-          "fontFamily": {
-            "display-lg-mobile": ["Source Serif 4"],
-            "body-md": ["Hanken Grotesk"],
-            "label-md": ["Hanken Grotesk"],
-            "headline-sm": ["Source Serif 4"],
-            "body-lg": ["Hanken Grotesk"],
-            "display-lg": ["Source Serif 4"],
-            "caption": ["Hanken Grotesk"],
-            "headline-md": ["Source Serif 4"]
-          },
-          "fontSize": {
-            "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
-            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-            "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-            "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
-            "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
-          }
-        },
-      },
-    }
-  </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Labeco - Ecologia e Conservação</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#faf8ff",
+                        "surface-tint": "#3f6653",
+                        "outline-variant": "#c1c8c2",
+                        "background": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#a5d0b9",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#a1f4c8",
+                        "error": "#ba1a1a",
+                        "primary": "#012d1d",
+                        "tertiary-fixed-dim": "#b3cdb7",
+                        "on-surface": "#171b2b",
+                        "surface-dim": "#d6d9ef",
+                        "outline": "#717973",
+                        "on-tertiary-fixed": "#092012",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#93ad98",
+                        "surface-bright": "#faf8ff",
+                        "secondary-fixed-dim": "#86d7ad",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2c3041",
+                        "surface-variant": "#dee1f8",
+                        "on-primary-container": "#86af99",
+                        "secondary-container": "#a1f4c8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e4e7fe",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#171b2b",
+                        "primary-fixed": "#c1ecd4",
+                        "on-tertiary-fixed-variant": "#354c3b",
+                        "surface-container": "#ebedff",
+                        "tertiary-fixed": "#cee9d3",
+                        "surface-container-highest": "#dee1f8",
+                        "on-surface-variant": "#414844",
+                        "tertiary-container": "#2a4131",
+                        "on-secondary-container": "#1b724f",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#152b1c",
+                        "primary-fixed-dim": "#a5d0b9",
+                        "on-primary-fixed": "#002114",
+                        "secondary": "#116c4a",
+                        "primary-container": "#1b4332",
+                        "surface-container-low": "#f3f2ff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#274e3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "margin-desktop": "auto",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "md": "24px",
+                        "max-width": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Source Serif 4"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Source Serif 4"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Source Serif 4"],
+                        "caption": ["Hanken Grotesk"],
+                        "headline-md": ["Source Serif 4"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
 
-    body {
-      font-family: 'Hanken Grotesk', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-  </style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .link-nav.ativo {
+            color: #012d1d;
+            font-weight: 700;
+            border-bottom: 2px solid #012d1d;
+            padding-bottom: 4px;
+        }
+
+        .dark .link-nav.ativo {
+            color: #a1f4c8;
+            border-bottom-color: #a1f4c8;
+        }
+    </style>
 </head>
 
 <body class="bg-surface text-on-surface">
-  <!-- TopNavBar -->
-  <nav
-    class="bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline sticky top-0 z-50 transition-colors duration-200">
-    <div
-      class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
-      <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Labeco</div>
-      <div class="hidden md:flex gap-md items-center">
-        <a class="text-primary dark:text-secondary-fixed font-bold border-b-2 border-primary dark:border-secondary-fixed pb-1 font-label-md text-label-md transition-colors duration-200"
-          href="#">Início</a>
-        <a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-          href="#">Sobre</a>
-        <a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-          href="#">Fauna</a>
-        <a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
-          href="#">Publicações</a>
-      </div>
-      <div class="flex items-center gap-xs">
+    <!-- TopNavBar -->
+    <nav
+        class="bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline sticky top-0 z-50 transition-colors duration-200">
         <div
-          class="hidden md:flex items-center bg-surface-container-low px-xs py-1 rounded-full border border-outline-variant">
-          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
-        </div>
-        <button
-          class="bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">Acesso
-          Restrito</button>
-      </div>
-    </div>
-  </nav>
-  <!-- Hero Section -->
-  <header class="relative w-full h-[600px] flex items-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img alt="Natureza preservada" class="w-full h-full object-cover"
-        data-alt="A breathtaking view of a dense Atlantic Forest canopy during the golden hour, with soft sunlight filtering through layers of vibrant green foliage. The scene is tranquil and majestic, showcasing the intricate textures of ferns and ancient trees in a pristine ecological sanctuary. The lighting is warm and ethereal, emphasizing the laboratory's commitment to high-end scientific conservation and professional environmental research. This visual sets a tone of trust and natural wonder for the Labeco website."
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb0x8_lgxkUmMJPHDkbg3mgm1ndQZI0TRSr5Ecegn_ogqlDA8J0MPSQBjh9yGw9d5kLwBcB0z-wUh7LAYK4_zgmMcpH6oUuwoJTyyUJ3W0hIbVYR6wUoPpE-ntAbM_1gjJ2coYWauWyh2BXgzeGWh6P3bKjZmwABDP_4YcxQ9xtul2lOPqAZZvG4Iw9gCKVxizMyaJ0lIHMX5b7bQm6kMx36T_oooMjuVnuKLEA5tKNOVYwWWzD44E3jeZB62ed2yxGGjWTz-w1eQ">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent"></div>
-    </div>
-    <div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
-      <div class="max-w-2xl text-on-primary">
-        <h1 class="font-display-lg text-display-lg mb-md leading-tight">Ciência a serviço da conservação ambiental</h1>
-        <p class="font-body-lg text-body-lg mb-lg opacity-90">O Laboratório de Ecologia e Conservação (Labeco) da UFFS
-          Campus Erechim dedica-se ao estudo da biodiversidade e ao desenvolvimento de estratégias para a preservação
-          dos nossos ecossistemas.</p>
-        <div class="flex flex-wrap gap-sm">
-          <button
-            class="bg-secondary-container text-on-secondary-container px-lg py-md rounded-full font-label-md text-label-md hover:brightness-95 transition-all">Explorar
-            Acervo</button>
-          <button
-            class="border border-on-primary text-on-primary px-lg py-md rounded-full font-label-md text-label-md hover:bg-on-primary/10 transition-all">Nossas
-            Pesquisas</button>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- About Lab Summary -->
-
-  <!-- Bento Grid Highlight Section -->
-  <section class="py-xl transition-all duration-700 opacity-100 translate-y-0">
-    <div class="px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
-      <h2 class="font-headline-md text-headline-md text-primary mb-lg text-center">Nossos Pilares</h2>
-      <div class="grid md:grid-cols-12 gap-md auto-rows-[250px]">
-        <!-- Fauna Card -->
-        <div class="md:col-span-8 group relative overflow-hidden rounded-xl border border-outline-variant bg-white">
-          <img alt="Fauna regional"
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            data-alt="A detailed, professional wildlife photograph of a South American coati foraging in a sun-dappled forest floor. The animal is in sharp focus, showcasing its textured fur and inquisitive expression, while the background consists of soft, blurred greenery characteristic of a temperate forest. The lighting is natural and crisp, emphasizing the biological diversity and research focus of the Labeco laboratory in a clean, modern aesthetic."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1LT3u9DoHxFiwgBUJjxgovOVMJTsdzi0Jc4KPJ3JNAvfY5PRmHsoj_9fAX51fP0zMiDIodoF68_GS1XdxYPbdGzcCvTGdlvSDeiTASebgAIbuoKPL_JTE7XWHDmlSjJiZjSh6RXH6iVy9RyriwagjcZOrBBti2gvSUNgwZEZIZAVuBoomRt-gUWAOSw8DcfDv20BE3jmfgSFI_tCeIwK40lUFdJ7yx-SUyg58PeCxyuAbRFTskTfdIElgjJrH8Q5VCvwWeFmGAbQ">
-          <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-md text-on-primary">
-            <h3 class="font-headline-sm text-headline-sm mb-xs">Acervo de Fauna</h3>
-            <p class="font-body-md text-body-md opacity-90 max-w-lg mb-sm">Acesse nosso banco de dados detalhado sobre a
-              biodiversidade local, incluindo registros fotográficos e dados taxonômicos.</p>
-            <a class="inline-flex items-center gap-xs font-label-md text-label-md hover:underline" href="#">
-              Ver acervo completo <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
-          </div>
-        </div>
-        <!-- Publications Card -->
-        <div class="md:col-span-4 p-md bg-white border border-outline-variant rounded-xl flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary mb-md">
-              <span class="material-symbols-outlined">article</span>
+            class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
+            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Labeco
             </div>
-            <h3 class="font-headline-sm text-headline-sm text-primary mb-sm">Publicações Científicas</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Nossos artigos, teses e relatórios técnicos
-              disponíveis para a comunidade acadêmica e interessados.</p>
-          </div>
-          <ul class="space-y-sm mt-md">
+            <div id="nav-principal" class="hidden md:flex gap-md items-center">
+                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="{% url 'index' %}">Início</a>
 
-            <li class="pb-xs">
-              <span class="font-caption text-caption text-primary">2022</span>
+                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="{% url 'sobre' %}">Sobre</a>
 
-            </li>
-          </ul>
-          <button
-            class="w-full border border-primary text-primary py-xs rounded-full font-label-md text-label-md hover:bg-primary/5 transition-colors">Ver
-            todas</button>
-        </div>
-        <!-- Action Card 1 -->
-        <div
-          class="md:col-span-4 p-md bg-primary text-on-primary rounded-xl flex flex-col justify-center items-center text-center">
-          <span class="material-symbols-outlined text-4xl mb-sm">science</span>
-          <h4 class="font-headline-sm text-headline-sm mb-xs">Projetos de Pesquisa</h4>
-          <p class="font-caption text-caption opacity-80">Conheça as frentes de trabalho atuais do laboratório.</p>
-        </div>
-        <!-- Action Card 2 -->
-        <div
-          class="md:col-span-4 p-md bg-secondary text-on-secondary rounded-xl flex flex-col justify-center items-center text-center">
-          <span class="material-symbols-outlined text-4xl mb-sm">school</span>
-          <h4 class="font-headline-sm text-headline-sm mb-xs">Oportunidades</h4>
-          <p class="font-caption text-caption opacity-80">Bolsas, estágios e voluntariado para estudantes de Biologia.
-          </p>
-        </div>
-        <!-- Action Card 3 -->
-        <div
-          class="md:col-span-4 p-md bg-tertiary text-on-tertiary rounded-xl flex flex-col justify-center items-center text-center">
-          <span class="material-symbols-outlined text-4xl mb-sm">mail</span>
-          <h4 class="font-headline-sm text-headline-sm mb-xs">Contato</h4>
-          <p class="font-caption text-caption opacity-80">Dúvidas ou parcerias? Entre em contato conosco.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer class="bg-primary dark:bg-on-secondary-fixed w-full py-lg px-margin-mobile md:px-margin-desktop">
-    <div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-sm">
-      <div class="flex flex-col items-center md:items-start gap-xs">
-        <div class="font-headline-sm text-headline-sm text-on-primary">Labeco</div>
-        <p class="text-on-primary-container opacity-80 font-body-md text-body-md text-center md:text-left">© Labeco -
-          UFFS Campus Erechim. Ciência e Conservação.</p>
-      </div>
-      <div class="flex gap-md items-center">
-        <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
-          href="#">Privacidade</a>
-        <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
-          href="#">Contato</a>
-        <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
-          href="#">UFFS</a>
-      </div>
-      <div class="flex gap-sm">
-        <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
-          <span class="material-symbols-outlined">share</span>
-        </a>
-        <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
-          <span class="material-symbols-outlined">language</span>
-        </a>
-      </div>
-    </div>
-  </footer>
-  <script>
-    // Simple intersection observer for subtle fade-in effects
-    const observerOptions = {
-      threshold: 0.1
-    };
+                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="{% url 'fauna' %}">Fauna</a>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100', 'translate-y-0');
-          entry.target.classList.remove('opacity-0', 'translate-y-4');
-        }
-      });
-    }, observerOptions);
+                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="{% url 'publicacoes' %}">Publicações</a>
+            </div>
+            <div class="flex items-center gap-xs">
 
-    document.querySelectorAll('section').forEach(section => {
-      section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
-      observer.observe(section);
-    });
-  </script>
+                <button
+                    class="bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">Acesso
+                    Restrito</button>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <footer class="bg-primary dark:bg-on-secondary-fixed w-full py-lg px-margin-mobile md:px-margin-desktop">
+        <div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-sm">
+            <div class="flex flex-col items-center md:items-start gap-xs">
+                <div class="font-headline-sm text-headline-sm text-on-primary">Labeco</div>
+                <p class="text-on-primary-container opacity-80 font-body-md text-body-md text-center md:text-left">©
+                    Labeco -
+                    UFFS Campus Erechim. Ciência e Conservação.</p>
+            </div>
+            <div class="flex gap-md items-center">
+
+                <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
+                    href="mailto:paulo.hartmann@gmail.com">Contato</a>
+                <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
+                    href="https://www.uffs.edu.br" target="_blank">UFFS</a>
+            </div>
+            <div class="flex gap-sm">
+                <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
+                    <span class="material-symbols-outlined">share</span>
+                </a>
+                <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
+                    <span class="material-symbols-outlined">language</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Simple intersection observer for subtle fade-in effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+    </script>
+    <script src="{% static 'js/nav.js' %}"></script>
 
 
 
