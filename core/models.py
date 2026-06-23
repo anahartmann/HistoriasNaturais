@@ -1,0 +1,121 @@
+import uuid
+
+from django.db import models
+from PIL import Image
+
+if not hasattr(Image, 'ANTIALIAS'):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
+
+from stdimage.models import StdImageField
+
+def buscar_ext(_instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return filename
+
+class Animal(models.Model):
+    nome_comum = models.CharField('Nome Comum', max_length=100)
+    nome_cientifico = models.CharField('Nome Científico', max_length=100)
+    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
+    fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
+    #local é uma lista de locais onde o animal foi encontrado, por isso é uma relação N para N
+    local = models.ManyToManyField('core.Local', verbose_name='Locais')
+    foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)})
+
+    class Meta:
+        verbose_name = 'Animal'
+        verbose_name_plural = 'Animais'
+    
+    def __str__(self):        
+        return self.nome_comum
+
+class Pesquisador(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+    email = models.EmailField('E-mail', max_length=100)
+    formacao = models.CharField('Graduação', max_length=1000)
+
+    class Meta:
+        verbose_name = 'Pesquisador'
+        verbose_name_plural = 'Pesquisadores'
+    def __str__(self):
+        return self.nome
+
+class Publicacao(models.Model):
+    #tipo de publicação (artigo, livro, capítulo de livro), temática, autores, grupo taxonômico e ano de publicação.
+    titulo = models.CharField('Título', max_length=100)
+    tipo = models.ForeignKey('core.TipoPublicacao', verbose_name='Tipo de Publicação', on_delete=models.CASCADE)
+    tematica = models.ForeignKey('core.Tematica', verbose_name='Temática', on_delete=models.CASCADE)
+    autores = models.ManyToManyField('core.Pesquisador', verbose_name='Autores')
+    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
+    ano = models.IntegerField('Ano de Publicação')
+    link = models.URLField('Link', max_length=1000)
+
+    class Meta:
+        verbose_name = 'Publicação'
+        verbose_name_plural = 'Publicações'
+    def __str__(self):
+        return self.titulo
+
+class TipoPublicacao(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+
+    class Meta:
+        verbose_name = 'Tipo de Publicação'
+        verbose_name_plural = 'Tipos de Publicações'
+
+    def __str__(self):
+        return self.nome
+
+class Tematica(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+
+    class Meta:
+        verbose_name = 'Temática'
+        verbose_name_plural = 'Temáticas'
+
+    def __str__(self):
+        return self.nome
+
+class GrupoTaxonomico(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+
+    class Meta:
+        verbose_name = 'Grupo Taxonômico'
+        verbose_name_plural = 'Grupos Taxonômicos'
+
+    def __str__(self):
+        return self.nome
+
+class Fenomeno(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+    descricao = models.TextField('Descrição', max_length=2000)
+
+    class Meta:
+        verbose_name = 'Fenômeno'
+        verbose_name_plural = 'Fenômenos'
+
+    def __str__(self):
+        return self.nome
+
+class Local(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+    endereco = models.CharField('Endereço', max_length=1000)
+
+    class Meta:
+        verbose_name = 'Local'
+        verbose_name_plural = 'Locais'
+
+    def __str__(self):
+        return self.nome
+
+class Pessoa(models.Model):
+    nome = models.CharField('Nome', max_length=100)
+    email = models.EmailField('E-mail', max_length=100)
+    admin = models.BooleanField('Administrador?', default=False)
+    class Meta:
+        verbose_name = 'Pessoa'
+        verbose_name_plural = 'Pessoas'
+
+    def __str__(self):
+        return self.nome
+    

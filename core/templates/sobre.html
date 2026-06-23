@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR" style="">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Sobre | Labeco - UFFS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#faf8ff",
+                        "surface-tint": "#3f6653",
+                        "outline-variant": "#c1c8c2",
+                        "background": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#a5d0b9",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#a1f4c8",
+                        "error": "#ba1a1a",
+                        "primary": "#012d1d",
+                        "tertiary-fixed-dim": "#b3cdb7",
+                        "on-surface": "#171b2b",
+                        "surface-dim": "#d6d9ef",
+                        "outline": "#717973",
+                        "on-tertiary-fixed": "#092012",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#93ad98",
+                        "surface-bright": "#faf8ff",
+                        "secondary-fixed-dim": "#86d7ad",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2c3041",
+                        "surface-variant": "#dee1f8",
+                        "on-primary-container": "#86af99",
+                        "secondary-container": "#a1f4c8",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e4e7fe",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#171b2b",
+                        "primary-fixed": "#c1ecd4",
+                        "on-tertiary-fixed-variant": "#354c3b",
+                        "surface-container": "#ebedff",
+                        "tertiary-fixed": "#cee9d3",
+                        "surface-container-highest": "#dee1f8",
+                        "on-surface-variant": "#414844",
+                        "tertiary-container": "#2a4131",
+                        "on-secondary-container": "#1b724f",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#152b1c",
+                        "primary-fixed-dim": "#a5d0b9",
+                        "on-primary-fixed": "#002114",
+                        "secondary": "#116c4a",
+                        "primary-container": "#1b4332",
+                        "surface-container-low": "#f3f2ff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#274e3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "margin-desktop": "auto",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "80px",
+                        "lg": "48px",
+                        "md": "24px",
+                        "max-width": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Source Serif 4"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Source Serif 4"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Source Serif 4"],
+                        "caption": ["Hanken Grotesk"],
+                        "headline-md": ["Source Serif 4"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #faf8ff;
+            color: #171b2b;
+            scroll-behavior: smooth;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(1, 45, 29, 0.8), rgba(1, 45, 29, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bento-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: #012d1d;
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopNavBar Shell -->
+    <nav class="bg-surface sticky top-0 z-50 border-b border-outline-variant">
+        <div
+            class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
+            <div class="flex items-center gap-xs">
+                <span class="material-symbols-outlined text-primary text-3xl">science</span>
+                <span class="font-headline-md text-headline-md font-bold text-primary">Labeco</span>
+            </div>
+            <div class="hidden md:flex items-center gap-md">
+                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="#">Início</a>
+                <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md"
+                    href="#">Sobre</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="#">Fauna</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                    href="#">Publicações</a>
+            </div>
+            <button
+                class="bg-primary text-on-primary px-sm py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
+                Acesso Restrito
+            </button>
+        </div>
+    </nav>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient relative h-[400px] flex items-center justify-center text-center px-margin-mobile"
+            data-alt="A cinematic, wide-angle shot of a lush Brazilian Atlantic Forest canopy during a misty morning. The lighting is soft and ethereal with cool green and blue tones, reflecting a serene and professional academic environment. The composition focuses on the intricate layers of biodiversity, with deep emerald greens and misty whites dominating the palette. The overall mood is one of quiet scientific discovery and environmental reverence.">
+            <div class="max-w-3xl">
+                <h1 class="font-display-lg text-display-lg text-white mb-md">Sobre o Labeco</h1>
+                <p class="font-body-lg text-body-lg text-white opacity-90">Laboratório de Ecologia e Conservação da UFFS
+                    Campus Erechim. Comprometidos com a ciência e a biodiversidade regional.</p>
+            </div>
+        </section>
+        <!-- Mission & Values Bento Grid -->
+        <section class="py-xl max-w-max-width mx-auto px-margin-mobile">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+                <!-- Main Mission Card -->
+                <div
+                    class="md:col-span-8 bg-surface-container-lowest border border-outline-variant p-lg flex flex-col justify-center">
+                    <span class="font-label-md text-label-md text-secondary tracking-widest uppercase mb-sm">Nossa
+                        Missão</span>
+                    <h2 class="font-headline-md text-headline-md text-primary mb-md">Promover a compreensão e proteção
+                        dos ecossistemas sul-brasileiros.</h2>
+                    <p class="text-on-surface-variant font-body-md text-body-md mb-md leading-relaxed">
+                        O Labeco atua na interface entre a pesquisa acadêmica de alto nível e a aplicação prática em
+                        conservação. Nossa missão é produzir dados científicos robustos que orientem políticas públicas
+                        e ações de preservação da fauna e flora no Rio Grande do Sul, com foco especial no bioma Mata
+                        Atlântica e nos ecossistemas de transição.
+                    </p>
+                    <div class="flex gap-sm mt-md">
+                        <div class="flex items-center gap-xs text-primary font-bold">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <span class="text-caption">Dados Precisos</span>
+                        </div>
+                        <div class="flex items-center gap-xs text-primary font-bold">
+                            <span class="material-symbols-outlined">nature_people</span>
+                            <span class="text-caption">Impacto Social</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Secondary Stats/Info Cards -->
+                <div class="md:col-span-4 flex flex-col gap-md">
+                    <div class="bg-tertiary-container text-tertiary-fixed p-md flex-1">
+                        <h3 class="font-headline-sm text-headline-sm mb-xs">8+ Anos</h3>
+                        <p class="font-caption text-caption opacity-80">De monitoramento contínuo em áreas de proteção
+                            permanente na região norte do RS.</p>
+                    </div>
+                    <div
+                        class="bg-secondary-container text-on-secondary-container p-md flex-1 border border-outline-variant">
+                        <h3 class="font-headline-sm text-headline-sm mb-xs">Ciência Viva</h3>
+                        <p class="font-caption text-caption">Transformamos publicações em ações práticas de manejo e
+                            preservação ambiental.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Researchers Section -->
+        <section class="bg-tertiary-fixed py-xl">
+            <div class="max-w-max-width mx-auto px-margin-mobile">
+                <div class="text-center mb-lg">
+                    <h2 class="font-display-lg text-display-lg text-primary mb-sm">Nossos Pesquisadores</h2>
+                    <p class="text-on-tertiary-fixed-variant max-w-2xl mx-auto font-body-md text-body-md">Conheça os
+                        especialistas que lideram nossas investigações e projetos de conservação na UFFS.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+                    <!-- Researcher Card 1 -->
+                    <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <div class="h-64 overflow-hidden relative">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                data-alt="A professional portrait of a female scientist in her 40s with a warm and intelligent expression. She is in a bright, modern laboratory setting with soft focus scientific equipment in the background. The lighting is clean and professional, emphasizing a light-mode aesthetic. The color palette is dominated by whites, clinical greens, and soft wood tones, reflecting an atmosphere of expertise and academic authority."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSLht5TV5URKeotEpgT93RYoK5kT9BO2tWOrdRMrI_Xfyc10ooYnUYUpRS_1AZDf2gs-RKAEfKp5SI16kOCIEeKw1gEDcQnVHl9swO3EroR0aUpbmnankhsX_toPIU1iq0Bx5JfY_F-506bRrvjWmeBeUEiKtItOJbXThVTBh5eF3CzTvsFFvzBau_MnkrrV-fZQFXKnGhdhdeLc5piFP5v-k1H63Rqzo4dP_o06VuZ5E0oL-JnHWpzglzUzDyq4-BxVWVknsxXb8">
+                        </div>
+                        <div class="p-md">
+                            <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dra. Helena Souza</h4>
+                            <p class="text-secondary font-label-md text-label-md mb-sm">Bióloga, Doutora em Ecologia</p>
+                            <p class="text-caption text-on-surface-variant leading-tight">Especialista em ecologia de
+                                paisagens e fragmentação florestal.</p>
+                        </div>
+                    </div>
+                    <!-- Researcher Card 2 -->
+                    <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <div class="h-64 overflow-hidden relative">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                data-alt="A professional headshot of a male researcher in a serene natural setting, perhaps a botanical garden. He has a thoughtful and composed demeanor. The lighting is natural sunlight filtered through green leaves, creating a soft, warm, and professional outdoor academic feel. The overall style is minimalist and clean, using organic green and neutral earthy tones to convey a sense of scientific connection with nature."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC225j2g84ltl5y0rQDfSiLmieZK7L3St7-Do2kGLGdoyUUJXYVLBaQSxMik0Uy1KCI_xPCBQOKeVe6rLERiUj58-r3Bnt5IZt1Ztq2tJC-Y-4l8rxi5-G9mUfuTUf7dZWlzjxaqjlrGBVM0NQzvoN5UxKWNtC33pygdIquq4rdatpJB-v1Md7obOWmvgvxaj9JJm7VhnPb7y9DczxMYxnmuNUYDGJwoGINbwalvgOhey0GZf4QYgPpK8uAsSt7lgHjS-3f6mpOskM">
+                        </div>
+                        <div class="p-md">
+                            <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dr. Ricardo Mendes</h4>
+                            <p class="text-secondary font-label-md text-label-md mb-sm">Biólogo, Dr. em Botânica</p>
+                            <p class="text-caption text-on-surface-variant leading-tight">Coordenador de estudos
+                                taxonômicos e restauração ambiental.</p>
+                        </div>
+                    </div>
+                    <!-- Researcher Card 3 -->
+                    <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <div class="h-64 overflow-hidden relative">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                data-alt="A professional portrait of a woman researcher with glasses, smiling confidently. She is wearing a simple, professional white shirt against a minimalist, well-lit background. The style is very modern and high-key, using soft shadows and a pristine white and emerald green color scheme. The composition is tight and clean, evoking feelings of trustworthiness, meticulous scientific study, and intellectual leadership."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5gIl0TJNwOQH0kdY8ph07pjiIz5SMowot9CzzUUOOXhz7eG2jtp99Iegnj9MB5re_XKP2Cdca3pqZR4CTLGi13ass8nrB_onZZDHEwiVM-UaGiGg9_8j4aFlGbC2cBo9yq7k8LAOC6oeZ4PMh03i_8-gNfet6-83IV-zXYa7RUR5Hw_bLjiRje0M9dYjsduRFaPru1SV3Ijq4IlkC54_G3O-8ByyImxdX5XB_SPVgqwTHVmiIflGvQTr_2elGQQ-mC8ykmSytsJg">
+                        </div>
+                        <div class="p-md">
+                            <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Msc. Ana Clara Lima</h4>
+                            <p class="text-secondary font-label-md text-label-md mb-sm">Bióloga, Mestre em Zoologia</p>
+                            <p class="text-caption text-on-surface-variant leading-tight">Líder técnica no monitoramento
+                                de mastofauna silvestre.</p>
+                        </div>
+                    </div>
+                    <!-- Researcher Card 4 -->
+                    <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                        <div class="h-64 overflow-hidden relative">
+                            <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                data-alt="A portrait of a male scientist in his late 30s, looking directly at the camera with a friendly and professional gaze. He is in a clean, modern office space with bookshelves filled with academic journals in the background. The lighting is soft and diffuse, highlighting the bright, professional environment. The color palette centers on deep forest greens and ivory whites, projecting an image of serious academic research and environmental stewardship."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1jVlrJJsQae4eYoeNAMi4FPhn0kE9pH5-s_HIEwU4VaZp8cCM29hwfgUqHqYTiVQ3BDDc7JEuuNeVd-YrVjQgufxRHAPy6Xz9NgIfDVKPoBsr3du68ZW4GLsKwWj2smqHSmUnH-dArUIibh5h_YuFAewOxI9YzCSioyrmbDWz_i8eZELVLU3GDMb4_-o89VbTocdUHLUimzGATW9AUQHJjOhCmovh5XsWg6g4WS2cPfZ_jF5_xykEw6ehnUT8hRFX6rLdV5mNurg">
+                        </div>
+                        <div class="p-md">
+                            <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dr. Marcos Valente</h4>
+                            <p class="text-secondary font-label-md text-label-md mb-sm">Estatístico, Dr. em Ecologia</p>
+                            <p class="text-caption text-on-surface-variant leading-tight">Especialista em modelagem
+                                preditiva e bioestatística aplicada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Values Section (Tonal Layer) -->
+
+    </main>
+    <!-- Footer -->
+    <footer class="bg-primary text-on-primary w-full py-lg px-margin-mobile md:px-margin-desktop">
+        <div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-sm">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-headline-sm text-headline-sm text-on-primary">Labeco</span>
+                <p class="font-caption text-caption opacity-80 mt-2 text-center md:text-left">© Labeco - UFFS Campus
+                    Erechim. Ciência e Conservação.</p>
+            </div>
+            <div class="flex gap-md">
+                <a class="font-body-md text-caption text-on-primary-container opacity-80 hover:text-white transition-colors"
+                    href="#">Privacidade</a>
+                <a class="font-body-md text-caption text-on-primary-container opacity-80 hover:text-white transition-colors"
+                    href="#">Contato</a>
+                <a class="font-body-md text-caption text-on-primary-container opacity-80 hover:text-white transition-colors"
+                    href="#">UFFS</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Micro-interaction: Scroll reveal animation for researcher cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bento-card');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
