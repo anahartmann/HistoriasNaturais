@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Acervo
+{% endblock %}
+
+{% include 'base.html' %}
+
+{%block content%}
+<main class="pt-24 pb-xl">
+    <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="flex flex-col gap-lg">
+            <!-- Single Large Photo -->
+            <div
+                class="w-full aspect-video rounded-xl overflow-hidden bg-surface-container shadow-sm border border-outline-variant">
+                <img class="w-full h-full object-cover"
+                    data-alt="A high-resolution, professional wildlife photograph of a Leopardus guttulus (Southern Tiger Cat) in its natural habitat within a lush Brazilian rainforest."
+                    src="{{ animal.foto.url }}" alt="{{ animal.nome_comum }}">
+            </div>
+            <!-- Species Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-start">
+                <div>
+                    <h1 class="font-display-lg text-display-lg text-primary mb-1">{{ animal.nome_comum }}</h1>
+                    <p class="font-headline-sm text-headline-sm text-outline italic mb-lg">{{ animal.nome_cientifico }}
+                    </p>
+                    <div class="space-y-md">
+                        <div class="p-md bg-surface border border-outline-variant rounded-xl">
+                            <h2 class="font-label-md text-primary uppercase mb-base">Grupo Taxonômico</h2>
+                            <p class="font-body-lg text-on-surface">{{ animal.grupo.nome }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-md">
+                    <div class="p-md bg-tertiary-fixed/30 border border-tertiary-fixed rounded-xl">
+                        <h2 class="font-label-md text-primary uppercase mb-base">{{ animal.fenomeno.nome }}</h2>
+                        <p class="font-body-lg text-on-surface leading-relaxed">
+                            {{ animal.fenomeno.descricao }}
+                    </div>
+                    <div class="p-md bg-surface border border-outline-variant rounded-xl">
+                        <h2 class="font-label-md text-primary uppercase mb-base">Local</h2>
+                        {% for local in animal.local.all %}
+                        <div class="flex items-start gap-xs text-on-surface">
+                            <span class="material-symbols-outlined text-primary">location_on</span>
+
+                            <div class="space-y-sm">
+
+                                <div>
+                                    <p class="font-bold">{{ local.nome }}</p>
+                                    <p>{{ local.endereco }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

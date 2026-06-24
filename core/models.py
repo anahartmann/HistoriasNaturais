@@ -32,7 +32,15 @@ class Animal(models.Model):
 class Pesquisador(models.Model):
     nome = models.CharField('Nome', max_length=100)
     email = models.EmailField('E-mail', max_length=100)
-    formacao = models.CharField('Graduação', max_length=1000)
+    #titulo so pode ser doutor ou mestre, por isso é uma escolha entre essas duas opções
+    TITULOS = [
+        ('Doutor', 'Doutor'),
+        ('Mestre', 'Mestre'),
+        ('Graduando', 'Graduando'),
+    ]
+    titulo = models.CharField('Título', max_length=10, choices=TITULOS, default='Graduando')
+    lattes = models.URLField('Lattes', max_length=1000, null=True, blank=True)
+    foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)}, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Pesquisador'

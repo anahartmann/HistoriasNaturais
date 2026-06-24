@@ -83,8 +83,8 @@ Acervo
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-md">
                 {% for animal in page_obj %}
                 <!-- Card 1 -->
-                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer"
-                    onclick="openDetails('Cerdocyon thous', 'Graxaim-do-mato', 'Mamíferos', 'Deslocamento Noturno', 'Erechim - Campus UFFS')">
+                <a href="{% url 'detalhes_animal' animal.id %}"
+    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer no-underline">
                     <div class="relative aspect-video overflow-hidden">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             src="{{ animal.foto.url }}" alt="{{ animal.nome_comum }}">
@@ -103,7 +103,7 @@ Acervo
                                 {{animal.fenomeno.nome }}</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
 
 

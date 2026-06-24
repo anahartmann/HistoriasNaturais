@@ -68,66 +68,27 @@ Sobre
                 especialistas que lideram nossas investigações e projetos de conservação na UFFS.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
-            <!-- Researcher Card 1 -->
+            {% for pesquisador in pesquisadores %}
             <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
                 style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
                 <div class="h-64 overflow-hidden relative">
-                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        data-alt="A professional portrait of a female scientist in her 40s with a warm and intelligent expression. She is in a bright, modern laboratory setting with soft focus scientific equipment in the background. The lighting is clean and professional, emphasizing a light-mode aesthetic. The color palette is dominated by whites, clinical greens, and soft wood tones, reflecting an atmosphere of expertise and academic authority."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSLht5TV5URKeotEpgT93RYoK5kT9BO2tWOrdRMrI_Xfyc10ooYnUYUpRS_1AZDf2gs-RKAEfKp5SI16kOCIEeKw1gEDcQnVHl9swO3EroR0aUpbmnankhsX_toPIU1iq0Bx5JfY_F-506bRrvjWmeBeUEiKtItOJbXThVTBh5eF3CzTvsFFvzBau_MnkrrV-fZQFXKnGhdhdeLc5piFP5v-k1H63Rqzo4dP_o06VuZ5E0oL-JnHWpzglzUzDyq4-BxVWVknsxXb8">
+
+                    {% if pesquisador.foto %}
+                    <img src="{{ pesquisador.foto.url }}" alt="{{ pesquisador.nome }}">
+                    {% else %}
+                    <img src="{% static 'img/naoidentificado.jpg' %}" alt="Imagem não identificada">
+                    {% endif %}
+
                 </div>
                 <div class="p-md">
-                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dra. Helena Souza</h4>
-                    <p class="text-secondary font-label-md text-label-md mb-sm">Bióloga, Doutora em Ecologia</p>
-                    <p class="text-caption text-on-surface-variant leading-tight">Especialista em ecologia de
-                        paisagens e fragmentação florestal.</p>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">{{pesquisador.titulo }}
+                        {{pesquisador.nome }}</h4>
+                    <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
+                        target="_blank">Lattes</a>
+                    <p class="text-caption text-on-surface-variant leading-tight">{{ pesquisador.email }}</p>
                 </div>
             </div>
-            <!-- Researcher Card 2 -->
-            <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
-                style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
-                <div class="h-64 overflow-hidden relative">
-                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        data-alt="A professional headshot of a male researcher in a serene natural setting, perhaps a botanical garden. He has a thoughtful and composed demeanor. The lighting is natural sunlight filtered through green leaves, creating a soft, warm, and professional outdoor academic feel. The overall style is minimalist and clean, using organic green and neutral earthy tones to convey a sense of scientific connection with nature."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC225j2g84ltl5y0rQDfSiLmieZK7L3St7-Do2kGLGdoyUUJXYVLBaQSxMik0Uy1KCI_xPCBQOKeVe6rLERiUj58-r3Bnt5IZt1Ztq2tJC-Y-4l8rxi5-G9mUfuTUf7dZWlzjxaqjlrGBVM0NQzvoN5UxKWNtC33pygdIquq4rdatpJB-v1Md7obOWmvgvxaj9JJm7VhnPb7y9DczxMYxnmuNUYDGJwoGINbwalvgOhey0GZf4QYgPpK8uAsSt7lgHjS-3f6mpOskM">
-                </div>
-                <div class="p-md">
-                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dr. Ricardo Mendes</h4>
-                    <p class="text-secondary font-label-md text-label-md mb-sm">Biólogo, Dr. em Botânica</p>
-                    <p class="text-caption text-on-surface-variant leading-tight">Coordenador de estudos
-                        taxonômicos e restauração ambiental.</p>
-                </div>
-            </div>
-            <!-- Researcher Card 3 -->
-            <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
-                style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
-                <div class="h-64 overflow-hidden relative">
-                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        data-alt="A professional portrait of a woman researcher with glasses, smiling confidently. She is wearing a simple, professional white shirt against a minimalist, well-lit background. The style is very modern and high-key, using soft shadows and a pristine white and emerald green color scheme. The composition is tight and clean, evoking feelings of trustworthiness, meticulous scientific study, and intellectual leadership."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5gIl0TJNwOQH0kdY8ph07pjiIz5SMowot9CzzUUOOXhz7eG2jtp99Iegnj9MB5re_XKP2Cdca3pqZR4CTLGi13ass8nrB_onZZDHEwiVM-UaGiGg9_8j4aFlGbC2cBo9yq7k8LAOC6oeZ4PMh03i_8-gNfet6-83IV-zXYa7RUR5Hw_bLjiRje0M9dYjsduRFaPru1SV3Ijq4IlkC54_G3O-8ByyImxdX5XB_SPVgqwTHVmiIflGvQTr_2elGQQ-mC8ykmSytsJg">
-                </div>
-                <div class="p-md">
-                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Msc. Ana Clara Lima</h4>
-                    <p class="text-secondary font-label-md text-label-md mb-sm">Bióloga, Mestre em Zoologia</p>
-                    <p class="text-caption text-on-surface-variant leading-tight">Líder técnica no monitoramento
-                        de mastofauna silvestre.</p>
-                </div>
-            </div>
-            <!-- Researcher Card 4 -->
-            <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
-                style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
-                <div class="h-64 overflow-hidden relative">
-                    <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        data-alt="A portrait of a male scientist in his late 30s, looking directly at the camera with a friendly and professional gaze. He is in a clean, modern office space with bookshelves filled with academic journals in the background. The lighting is soft and diffuse, highlighting the bright, professional environment. The color palette centers on deep forest greens and ivory whites, projecting an image of serious academic research and environmental stewardship."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1jVlrJJsQae4eYoeNAMi4FPhn0kE9pH5-s_HIEwU4VaZp8cCM29hwfgUqHqYTiVQ3BDDc7JEuuNeVd-YrVjQgufxRHAPy6Xz9NgIfDVKPoBsr3du68ZW4GLsKwWj2smqHSmUnH-dArUIibh5h_YuFAewOxI9YzCSioyrmbDWz_i8eZELVLU3GDMb4_-o89VbTocdUHLUimzGATW9AUQHJjOhCmovh5XsWg6g4WS2cPfZ_jF5_xykEw6ehnUT8hRFX6rLdV5mNurg">
-                </div>
-                <div class="p-md">
-                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">Dr. Marcos Valente</h4>
-                    <p class="text-secondary font-label-md text-label-md mb-sm">Estatístico, Dr. em Ecologia</p>
-                    <p class="text-caption text-on-surface-variant leading-tight">Especialista em modelagem
-                        preditiva e bioestatística aplicada.</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
