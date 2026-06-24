@@ -1,0 +1,53 @@
+<footer class="bg-primary dark:bg-on-secondary-fixed w-full py-lg px-margin-mobile md:px-margin-desktop">
+    <div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-center gap-sm">
+        <div class="flex flex-col items-center md:items-start gap-xs">
+            <div class="font-headline-sm text-headline-sm text-on-primary">Labeco</div>
+            <p class="text-on-primary-container opacity-80 font-body-md text-body-md text-center md:text-left">©
+                Labeco -
+                UFFS Campus Erechim. Ciência e Conservação.</p>
+        </div>
+        <div class="flex gap-md items-center">
+
+            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
+                href="mailto:paulo.hartmann@gmail.com">Contato</a>
+            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors font-body-md text-body-md"
+                href="https://www.uffs.edu.br" target="_blank">UFFS</a>
+        </div>
+        <div class="flex gap-sm">
+            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
+                <span class="material-symbols-outlined">share</span>
+            </a>
+            <a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">
+                <span class="material-symbols-outlined">language</span>
+            </a>
+        </div>
+    </div>
+</footer>
+<script>
+    // Simple intersection observer for subtle fade-in effects
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-4');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+        observer.observe(section);
+    });
+</script>
+
+
+
+
+
+</body>
+
+</html>

@@ -98,7 +98,7 @@ class Fenomeno(models.Model):
         return self.nome
 
 class Local(models.Model):
-    nome = models.CharField('Nome', max_length=100)
+    nome = models.CharField('Nome', max_length=100, unique=True)
     endereco = models.CharField('Endereço', max_length=1000)
 
     class Meta:
