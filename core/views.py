@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404
-from .models import Animal, Fenomeno, GrupoTaxonomico, Local, Pesquisador, Publicacao, Tematica, TipoPublicacao
+from .models import Animal, Fenomeno, GrupoTaxonomico, ImagemAnimal, Local, Pesquisador, Publicacao, Tematica, TipoPublicacao
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -29,12 +29,12 @@ def fauna(request):
     grupo_selecionado = converter_para_int(request.GET.get('grupo'))
     local_selecionado = converter_para_int(request.GET.get('local'))
 
-    animais = Animal.objects.all()
+    animais = ImagemAnimal.objects.all()
 
     if search:
         animais = animais.filter(
-            Q(nome_comum__icontains=search) |
-            Q(nome_cientifico__icontains=search)
+            Q(animal__nome_comum__icontains=search) |
+            Q(animal__nome_cientifico__icontains=search)
         )
 
     if fenomeno_selecionado:
@@ -138,7 +138,7 @@ def publicacoes(request):
     return render(request, 'publicacao.html', dados)
 
 def detalhes_animal(request, animal_id):
-    animal = get_object_or_404(Animal, id=animal_id)
+    animal = get_object_or_404(ImagemAnimal, id=animal_id)
     return render(request, 'animais.html', {'animal': animal})
 
 def admin(request):

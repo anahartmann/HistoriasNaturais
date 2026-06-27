@@ -5,8 +5,6 @@
 Acervo
 {% endblock %}
 
-{% include 'base.html' %}
-
 {%block content%}
 <main class="pt-24 pb-xl">
     <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
@@ -14,50 +12,78 @@ Acervo
             <!-- Single Large Photo -->
             <div
                 class="w-full aspect-video rounded-xl overflow-hidden bg-surface-container shadow-sm border border-outline-variant">
-                <img class="w-full h-full object-cover"
-                    data-alt="A high-resolution, professional wildlife photograph of a Leopardus guttulus (Southern Tiger Cat) in its natural habitat within a lush Brazilian rainforest."
-                    src="{{ animal.foto.url }}" alt="{{ animal.nome_comum }}">
+
+                <img class="w-full h-full object-cover cursor-pointer" src="{{ animal.foto.url }}"
+                    alt="{{ animal.animal.nome_comum }}" onclick="abrirImagem('{{ animal.foto.url }}')">
             </div>
             <!-- Species Information -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-start">
                 <div>
-                    <h1 class="font-display-lg text-display-lg text-primary mb-1">{{ animal.nome_comum }}</h1>
-                    <p class="font-headline-sm text-headline-sm text-outline italic mb-lg">{{ animal.nome_cientifico }}
-                    </p>
-                    <div class="space-y-md">
-                        <div class="p-md bg-surface border border-outline-variant rounded-xl">
-                            <h2 class="font-label-md text-primary uppercase mb-base">Grupo Taxonômico</h2>
-                            <p class="font-body-lg text-on-surface">{{ animal.grupo.nome }}</p>
-                        </div>
-                    </div>
+                    <h1 class="font-display-lg text-display-lg text-primary mb-1">{{ animal.animal.nome_comum }}</h1>
+                    <p class="font-headline-sm text-headline-sm text-outline italic mb-lg">
+                        {{animal.animal.nome_cientifico }}</p>
+
                 </div>
                 <div class="space-y-md">
                     <div class="p-md bg-tertiary-fixed/30 border border-tertiary-fixed rounded-xl">
-                        <h2 class="font-label-md text-primary uppercase mb-base">{{ animal.fenomeno.nome }}</h2>
+                        <h2 class="font-label-md text-primary uppercase mb-base">{{ animal.fenomeno }}</h2>
                         <p class="font-body-lg text-on-surface leading-relaxed">
                             {{ animal.fenomeno.descricao }}
+                        </p>
                     </div>
                     <div class="p-md bg-surface border border-outline-variant rounded-xl">
-                        <h2 class="font-label-md text-primary uppercase mb-base">Local</h2>
-                        {% for local in animal.local.all %}
-                        <div class="flex items-start gap-xs text-on-surface">
-                            <span class="material-symbols-outlined text-primary">location_on</span>
-
-                            <div class="space-y-sm">
-
-                                <div>
-                                    <p class="font-bold">{{ local.nome }}</p>
-                                    <p>{{ local.endereco }}</p>
+                        <h2 class="font-label-md text-primary uppercase mb-base">Grupo Taxonômico</h2>
+                        <p class="font-body-lg text-on-surface leading-relaxed">{{ animal.grupo }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-xl">
+                <h2 class="font-headline-sm text-headline-sm text-primary mb-md">Visualizações Geográficas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <!-- Local do Registro -->
+                    <div class="flex flex-col gap-sm">
+                        <div class="p-md bg-surface border border-outline-variant rounded-xl h-full">
+                            <h3 class="font-label-md text-primary uppercase mb-base">Local do Registro</h3>
+                            <p class="font-body-md text-on-surface-variant mb-md">Ponto exato onde este registro
+                                fotográfico foi realizado.</p>
+                            <div class="aspect-video rounded-lg overflow-hidden border border-outline-variant">
+                                <div id="map" data-lat="{{ animal.local.latitude }}"
+                                    data-lng="{{ animal.local.longitude }}" class="w-full h-full">
                                 </div>
-
                             </div>
                         </div>
-                        {% endfor %}
+                    </div>
+                    <!-- Mapa de Ocorrência -->
+                    <div class="flex flex-col gap-sm">
+                        <div class="p-md bg-surface border border-outline-variant rounded-xl h-full">
+                            <h3 class="font-label-md text-primary uppercase mb-base">Mapa de Ocorrência</h3>
+                            <p class="font-body-md text-on-surface-variant mb-md">Distribuição geográfica e outros
+                                avistamentos de {{ animal.animal.nome_cientifico }}.</p>
+                            <div
+                                class="aspect-video bg-surface-container rounded-lg overflow-hidden border border-outline-variant flex items-center justify-center">
+                                <div class="flex flex-col items-center text-outline">
+                                   <div id="map2" data-lat="{{ animal.local.latitude }}"
+                                    data-lng="{{ animal.local.longitude }}" class="w-full h-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
 
+
+    <div id="modalImagem" class="hidden fixed inset-0 bg-black/80 z-50 items-center justify-center p-md"
+        onclick="fecharImagem()">
+
+        <img id="imagemAmpliada" class="max-w-full max-h-full rounded-xl shadow-lg" src=""
+            alt="{{ animal.nome_comum }}">
+    </div>
+
+    <script src="{% static 'js/imagem.js' %}"></script>
+    <script src="{% static 'js/mapa.js' %}"></script>
+
+</main>
 {% endblock %}

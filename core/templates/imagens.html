@@ -50,7 +50,7 @@ Acervo
                             {% endfor %}
                         </select>
 
-                               
+
 
                         <select name="local"
                             class="w-full bg-surface border-outline-variant rounded-lg text-sm focus:border-secondary focus:ring-secondary">
@@ -84,15 +84,17 @@ Acervo
                 {% for animal in page_obj %}
                 <!-- Card 1 -->
                 <a href="{% url 'detalhes_animal' animal.id %}"
-    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer no-underline">
+                    class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer no-underline">
                     <div class="relative aspect-video overflow-hidden">
+
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             src="{{ animal.foto.url }}" alt="{{ animal.nome_comum }}">
+
                     </div>
                     <div class="p-md">
-                        <h4 class="font-headline-sm text-headline-sm text-primary">{{ animal.nome_comum }}</h4>
+                        <h4 class="font-headline-sm text-headline-sm text-primary">{{ animal.animal.nome_comum }}</h4>
                         <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">
-                            {{ animal.nome_cientifico }}</p>
+                            {{ animal.animal.nome_cientifico }}</p>
                         </p>
                         <div class="flex gap-xs mt-sm">
                             <span

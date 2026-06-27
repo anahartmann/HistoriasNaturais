@@ -16,18 +16,25 @@ def buscar_ext(_instance, filename):
 class Animal(models.Model):
     nome_comum = models.CharField('Nome Comum', max_length=100)
     nome_cientifico = models.CharField('Nome Científico', max_length=100)
-    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
-    fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
-    #local é uma lista de locais onde o animal foi encontrado, por isso é uma relação N para N
-    local = models.ManyToManyField('core.Local', verbose_name='Locais')
-    foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)})
-
     class Meta:
         verbose_name = 'Animal'
         verbose_name_plural = 'Animais'
     
     def __str__(self):        
         return self.nome_comum
+    
+class ImagemAnimal(models.Model):
+    animal = models.ForeignKey('core.Animal', verbose_name='Animal', on_delete=models.CASCADE)
+    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
+    fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
+    local = models.ForeignKey('core.Local', verbose_name='Locais', on_delete=models.CASCADE)
+    foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)})
+
+    class Meta:
+        verbose_name = 'Imagem de Animal'
+        verbose_name_plural = 'Imagens de Animais'
+    def __str__(self):
+        return f'{self.animal.nome_comum} - {self.fenomeno.nome} - {self.local.nome}'
 
 class Pesquisador(models.Model):
     nome = models.CharField('Nome', max_length=100)
@@ -37,6 +44,9 @@ class Pesquisador(models.Model):
         ('Doutor', 'Doutor'),
         ('Mestre', 'Mestre'),
         ('Graduando', 'Graduando'),
+        ('Pós-Doutor', 'Pós-Doutor'),
+        ('Mestrando', 'Mestrando'),
+        ('Doutorando', 'Doutorando'),
     ]
     titulo = models.CharField('Título', max_length=10, choices=TITULOS, default='Graduando')
     lattes = models.URLField('Lattes', max_length=1000, null=True, blank=True)
@@ -107,7 +117,8 @@ class Fenomeno(models.Model):
 
 class Local(models.Model):
     nome = models.CharField('Nome', max_length=100, unique=True)
-    endereco = models.CharField('Endereço', max_length=1000)
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
 
     class Meta:
         verbose_name = 'Local'
