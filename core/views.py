@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404
-from .models import Animal, Fenomeno, GrupoTaxonomico, Local, Pesquisador, Publicacao
+from .models import Animal, Fenomeno, GrupoTaxonomico, Local, Pesquisador, Publicacao, Tematica, TipoPublicacao
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -82,8 +82,64 @@ def sobre(request):
    
 
 def publicacoes(request):
-    return render(request, 'publicacao.html')
+    search = request.GET.get('search')
+    tematica = converter_para_int(request.GET.get('tematica'))
+    grupo_selecionado = converter_para_int(request.GET.get('grupo'))
+    ano = converter_para_int(request.GET.get('ano'))
+    tipo_publicacao = converter_para_int(request.GET.get('tipo_publicacao'))
+
+    publicacoes = Publicacao.objects.all()
+
+    if search:
+        publicacoes = publicacoes.filter(
+            Q(titulo__icontains=search) |
+            Q(autores__nome__icontains=search)
+        )
+
+    if tematica:
+        publicacoes = publicacoes.filter(tematica_id=tematica)
+
+    if grupo_selecionado:
+        publicacoes = publicacoes.filter(grupo_id=grupo_selecionado)
+
+    if ano:
+        publicacoes = publicacoes.filter(ano=ano)
+
+    if tipo_publicacao:
+        publicacoes = publicacoes.filter(tipo_id=tipo_publicacao)
+
+    publicacoes = publicacoes.distinct()
+
+    paginator = Paginator(publicacoes, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    parametros = request.GET.copy()
+    if 'page' in parametros:
+        del parametros['page']
+
+    query_string = parametros.urlencode()
+    page_prefix = f'{query_string}&' if query_string else ''
+
+    dados = {
+        'page_obj': page_obj,
+        'tematicas': Tematica.objects.all().order_by('nome'),
+        'grupos': GrupoTaxonomico.objects.all().order_by('nome'),
+        'anos': Publicacao.objects.values_list('ano', flat=True).distinct().order_by('ano'),
+        'tipos_publicacao': TipoPublicacao.objects.all().order_by('nome'),
+        'search': search or '',
+        'tematica_selecionada': tematica,
+        'grupo_selecionado': grupo_selecionado,
+        'ano_selecionado': ano,
+        'tipo_publicacao_selecionado': tipo_publicacao,
+        'page_prefix': page_prefix,
+    }
+    
+    return render(request, 'publicacao.html', dados)
 
 def detalhes_animal(request, animal_id):
     animal = get_object_or_404(Animal, id=animal_id)
     return render(request, 'animais.html', {'animal': animal})
+
+def admin(request):
+    return render(request, 'admin.html')

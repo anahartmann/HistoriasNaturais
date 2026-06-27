@@ -146,7 +146,8 @@
         class="bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline sticky top-0 z-50 transition-colors duration-200">
         <div
             class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
-            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Labeco
+            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">
+                Histórias Naturais
             </div>
             <div id="nav-principal" class="hidden md:flex gap-md items-center">
                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
@@ -162,9 +163,9 @@
             </div>
             <div class="flex items-center gap-xs">
 
-                <button
-                    class="bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">Acesso
-                    Restrito</button>
+                <a class="bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity"
+                    href="{% url 'admin' %}">Acesso
+                    Restrito</a>
             </div>
         </div>
     </nav>

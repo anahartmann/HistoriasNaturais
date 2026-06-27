@@ -19,180 +19,127 @@ Publicações
         </p>
     </header>
     <!-- Filters Section -->
-    <section class="mb-lg space-y-md">
+    <form method="get" class="mb-lg space-y-md">
         <div class="bg-surface-container-low p-md rounded-xl border border-outline-variant">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-md">
                 <!-- Search Input -->
                 <div class="md:col-span-1">
                     <label class="font-label-md text-label-md text-primary mb-xs block">Palavra-chave</label>
                     <div class="relative">
                         <input
                             class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none"
-                            placeholder="Buscar título ou autor..." type="text">
+                            placeholder="Buscar título ou autor..." value="{{ search }}" type="text" name = "search">
                     </div>
                 </div>
                 <!-- Dropdown Filters -->
                 <div>
                     <label class="font-label-md text-label-md text-primary mb-xs block">Temática</label>
-                    <select
+                    <select name="tematica"
                         class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option>Todas as Temáticas</option>
-                        <option>Ecologia de Paisagem</option>
-                        <option>Conservação de Espécies</option>
-                        <option>Monitoramento Ambiental</option>
+                        <option value = "">Todas as Temáticas</option>
+                        {% for tematica in tematicas %}
+                        <option value="{{ tematica.id }}" {% if tematica_selecionada == tematica.id %}selected{% endif %}>
+                            {{ tematica.nome }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div>
                     <label class="font-label-md text-label-md text-primary mb-xs block">Grupo Taxonômico</label>
-                    <select
+                    <select name="grupo"
                         class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option>Todos os Grupos</option>
-                        <option>Mamíferos</option>
-                        <option>Aves</option>
-                        <option>Anfíbios &amp; Répteis</option>
-                        <option>Invertebrados</option>
+                        <option value = "">Todos os Grupos</option>
+                        {% for grupo in grupos %}
+                        <option value="{{ grupo.id }}" {% if grupo_selecionado == grupo.id %}selected{% endif %}>
+                            {{ grupo.nome }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div>
                     <label class="font-label-md text-label-md text-primary mb-xs block">Ano</label>
-                    <select
+                    <select name="ano"
                         class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option>Todos os Anos</option>
-                        <option>2024</option>
-                        <option>2023</option>
-                        <option>2022</option>
-                        <option>2021</option>
+                        <option value="">Todos os Anos</option>
+                        {% for ano in anos %}
+                        <option value="{{ ano }}" {% if ano_selecionado == ano %}selected{% endif %}>
+                            {{ ano }}</option>
+                        {% endfor %}
                     </select>
                 </div>
+              
+                <button type="submit"
+                    class="w-full bg-primary-container text-on-primary-container py-2 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors mt-md">
+                    Buscar
+                </button>
             </div>
         </div>
+
         <!-- Type Pills -->
         <div class="flex flex-wrap gap-xs">
-            <button
-                class="filter-pill active px-md py-xs rounded-full font-label-md text-label-md border border-tertiary-container transition-all">Todos</button>
-            <button
-                class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Artigos</button>
-            <button
-                class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Livros</button>
-            <button
-                class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Capítulos</button>
-        </div>
-    </section>
+
+    <button type="submit" name="tipo_publicacao" value=""
+        class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
+        {% if not tipo_publicacao_selecionado %}
+            active border-tertiary-container bg-primary-container text-on-primary-container
+        {% else %}
+            bg-white border-outline-variant text-on-surface-variant hover:border-primary
+        {% endif %}">
+        Todos
+    </button>
+
+    {% for tipo in tipos_publicacao %}
+    <button type="submit" name="tipo_publicacao" value="{{ tipo.id }}"
+        class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
+        {% if tipo_publicacao_selecionado == tipo.id %}
+            active border-tertiary-container bg-primary-container text-on-primary-container
+        {% else %}
+            bg-white border-outline-variant text-on-surface-variant hover:border-primary
+        {% endif %}">
+        {{ tipo.nome }}
+    </button>
+    {% endfor %}
+
+</div>
+    </form>
     <!-- Content Grid (Asymmetric) -->
     <div class="grid grid-cols-1 gap-gutter">
         <!-- Main Results Column -->
         <div class="w-full space-y-md">
             <div class="grid grid-cols-1 gap-gutter">
-                <!-- Card 1 -->
+                {% for publicacao in page_obj %}
                 <div
                     class="publication-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
                     <div class="flex-1">
                         <div class="flex items-center gap-sm mb-xs">
                             <span
-                                class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded-full text-caption font-label-md">Artigo</span>
-                            <span class="text-caption text-on-surface-variant">2023</span>
+                                class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded-full text-caption font-label-md">
+                                {{publicacao.tipo.nome }}</span>
+                            <span class="text-caption text-on-surface-variant">{{ publicacao.ano }}</span>
                         </div>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Fragmentação
-                            Florestal e a Mastofauna no Alto Uruguai</h3>
-                        <p class="text-body-md text-on-surface-variant mb-sm">Souza, H. &amp; Mendes, R.</p>
+                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">
+                            {{ publicacao.titulo }}</h3>
+                        {% for autor in publicacao.autores.all %}
+                        <p class="text-body-md text-on-surface-variant mb-sm">{{ autor.nome }}</p>
+                        {% endfor %}
                         <div class="flex flex-wrap gap-xs">
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Conservação</span>
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Mamíferos</span>
+                            <span class="text-caption bg-surface-container px-xs py-1 rounded">
+                                {{ publicacao.tematica.nome }}</span>
+                            <span class="text-caption bg-surface-container px-xs py-1 rounded">
+                                {{ publicacao.grupo.nome }}</span>
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <a href="#"
+                        <a href="{{ publicacao.link }}" target="_blank"
                             class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs">
                             Acessar Publicação
                             <span class="material-symbols-outlined text-body-md">arrow_forward</span>
                         </a>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="publication-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
-                    <div class="flex-1">
-                        <div class="flex items-center gap-sm mb-xs">
-                            <span
-                                class="bg-tertiary-container text-on-tertiary-container px-xs py-1 rounded-full text-caption font-label-md">Livro</span>
-                            <span class="text-caption text-on-surface-variant">2022</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Guia de
-                            Campo: Anfíbios da Mata Atlântica Sul</h3>
-                        <p class="text-body-md text-on-surface-variant mb-sm">Lima, A. C. et al.</p>
-                        <div class="flex flex-wrap gap-xs">
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Biodiversidade</span>
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Anfíbios</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <a href="#"
-                            class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs">
-                            Acessar Publicação
-                            <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="publication-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
-                    <div class="flex-1">
-                        <div class="flex items-center gap-sm mb-xs">
-                            <span
-                                class="bg-surface-container-highest text-on-surface-variant px-xs py-1 rounded-full text-caption font-label-md">Capítulo</span>
-                            <span class="text-caption text-on-surface-variant">2021</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Políticas
-                            Públicas e Conservação Ambiental no RS</h3>
-                        <p class="text-body-md text-on-surface-variant mb-sm">Valente, M.</p>
-                        <div class="flex flex-wrap gap-xs">
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Políticas
-                                Públicas</span>
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Geral</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <a href="#"
-                            class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs">
-                            Acessar Publicação
-                            <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="publication-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
-                    <div class="flex-1">
-                        <div class="flex items-center gap-sm mb-xs">
-                            <span
-                                class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded-full text-caption font-label-md">Artigo</span>
-                            <span class="text-caption text-on-surface-variant">2023</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Monitoramento
-                            de Avifauna em Áreas Protegidas</h3>
-                        <p class="text-body-md text-on-surface-variant mb-sm">Silva, J. &amp; Santos, L.</p>
-                        <div class="flex flex-wrap gap-xs">
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Ecologia</span>
-                            <span class="text-caption bg-surface-container px-xs py-1 rounded">Aves</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <a href="#"
-                            class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs">
-                            Acessar Publicação
-                            <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- Side Bento Column -->
 
     </div>
 </main>
-<!-- Footer -->
 
 {% endblock %}
