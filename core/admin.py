@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Animal, ImagemAnimal, Pesquisador, Publicacao, Local, TipoPublicacao, Tematica, GrupoTaxonomico, Fenomeno
+from core.models import Animal, ImagemAnimal, Pesquisa, Pesquisador, Publicacao, Local, TipoPublicacao, Tematica, GrupoTaxonomico, Fenomeno
 
 # Register your models here.
 
@@ -17,3 +17,4 @@ admin.site.register(Tematica)
 admin.site.register(GrupoTaxonomico)
 admin.site.register(Fenomeno)
 admin.site.register(ImagemAnimal)
+admin.site.register(Pesquisa)

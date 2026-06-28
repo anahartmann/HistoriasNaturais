@@ -11,9 +11,8 @@ Acervo
         <div class="flex flex-col gap-lg">
             <!-- Single Large Photo -->
             <div
-                class="w-full aspect-video rounded-xl overflow-hidden bg-surface-container shadow-sm border border-outline-variant">
-
-                <img class="w-full h-full object-cover cursor-pointer" src="{{ animal.foto.url }}"
+                class=" aspect-video rounded-xl overflow-hidden ">
+                <img class="w-full h-full object-contain cursor-pointer" src="{{ animal.foto.url }}"
                     alt="{{ animal.animal.nome_comum }}" onclick="abrirImagem('{{ animal.foto.url }}')">
             </div>
             <!-- Species Information -->
@@ -59,13 +58,8 @@ Acervo
                             <h3 class="font-label-md text-primary uppercase mb-base">Mapa de Ocorrência</h3>
                             <p class="font-body-md text-on-surface-variant mb-md">Distribuição geográfica e outros
                                 avistamentos de {{ animal.animal.nome_cientifico }}.</p>
-                            <div
-                                class="aspect-video bg-surface-container rounded-lg overflow-hidden border border-outline-variant flex items-center justify-center">
-                                <div class="flex flex-col items-center text-outline">
-                                   <div id="map2" data-lat="{{ animal.local.latitude }}"
-                                    data-lng="{{ animal.local.longitude }}" class="w-full h-full">
-                                    </div>
-                                </div>
+                            <div class="aspect-video rounded-lg overflow-hidden border border-outline-variant">
+                                <div id="map2" class="w-full h-full"></div>
                             </div>
                         </div>
                     </div>
@@ -81,9 +75,29 @@ Acervo
         <img id="imagemAmpliada" class="max-w-full max-h-full rounded-xl shadow-lg" src=""
             alt="{{ animal.nome_comum }}">
     </div>
+<script>
 
+const registros = [
+
+{% for registro in registros %}
+{
+    id: {{ registro.id }},
+    nome: "{{ registro.animal.nome_comum|escapejs }}",
+    latitude: {{ registro.local.latitude }},
+    longitude: {{ registro.local.longitude }},
+    foto: "{{ registro.foto.url }}",
+    especie: "{{ registro.animal.nome_cientifico|escapejs }}",
+    fenomeno: "{{ registro.fenomeno|escapejs }}",
+    atual: {% if registro.id == animal.id %}true{% else %}false{% endif %}
+},
+{% endfor %}
+
+];
+
+</script>
     <script src="{% static 'js/imagem.js' %}"></script>
     <script src="{% static 'js/mapa.js' %}"></script>
+    <script src="{% static 'js/mapas.js' %}"></script>
 
 </main>
 {% endblock %}

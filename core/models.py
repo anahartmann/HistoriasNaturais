@@ -67,6 +67,7 @@ class Publicacao(models.Model):
     grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
     ano = models.IntegerField('Ano de Publicação')
     link = models.URLField('Link', max_length=1000)
+    pesquisa = models.ForeignKey('core.Pesquisa', verbose_name='Pesquisa', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Publicação'
@@ -138,3 +139,27 @@ class Pessoa(models.Model):
     def __str__(self):
         return self.nome
     
+class Pesquisa(models.Model):
+    titulo = models.CharField('Título', max_length=100)
+    descricao = models.TextField('Descrição', max_length=2000)
+    pesquisadores = models.ManyToManyField('core.Pesquisador', verbose_name='Pesquisadores')
+    TITULOS = [
+        ('Doutorado', 'Doutorado'),
+        ('Mestrado', 'Mestrado'),
+        ('Graduação', 'Graduação'),
+        ('Pós-Doutorado', 'Pós-Doutorado'),
+    ]
+    nivel = models.CharField('Nível', max_length=100, choices=TITULOS)
+    STATUS = [
+        ('Em andamento', 'Em andamento'),
+        ('Concluída', 'Concluída'),
+        ('Interrompida', 'Interrompida'),
+    ]
+    status = models.CharField('Status', max_length=100, choices=STATUS)
+    class Meta:
+        verbose_name = 'Pesquisa'
+        verbose_name_plural = 'Pesquisas'
+
+    def __str__(self):
+        return self.titulo
+

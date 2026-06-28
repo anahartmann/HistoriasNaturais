@@ -1,9 +1,19 @@
+from django.core import paginator
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.shortcuts import render, get_object_or_404
 from .models import Animal, Fenomeno, GrupoTaxonomico, ImagemAnimal, Local, Pesquisador, Publicacao, Tematica, TipoPublicacao
+import unicodedata
+
+def remover_acentos(texto):
+    if not texto:
+        return ''
+    return ''.join(
+        caractere for caractere in unicodedata.normalize('NFKD', texto)
+        if not unicodedata.combining(caractere)
+    ).lower()
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -24,18 +34,22 @@ def converter_para_int(valor):
 
 
 def fauna(request):
-    search = request.GET.get('search')
+    search = request.GET.get('search', '').strip()
+    termo = remover_acentos(search)
     fenomeno_selecionado = converter_para_int(request.GET.get('fenomeno'))
     grupo_selecionado = converter_para_int(request.GET.get('grupo'))
     local_selecionado = converter_para_int(request.GET.get('local'))
 
     animais = ImagemAnimal.objects.all()
 
-    if search:
-        animais = animais.filter(
-            Q(animal__nome_comum__icontains=search) |
-            Q(animal__nome_cientifico__icontains=search)
-        )
+    if termo:
+        animais = [
+            animal for animal in animais
+            if termo in remover_acentos(animal.animal.nome_comum.lower())
+            or termo in remover_acentos(animal.animal.nome_cientifico.lower())
+        ]
+    else:
+        animais = list(animais)
 
     if fenomeno_selecionado:
         animais = animais.filter(fenomeno_id=fenomeno_selecionado)
@@ -46,7 +60,11 @@ def fauna(request):
     if local_selecionado:
         animais = animais.filter(local__id=local_selecionado)
 
-    animais = animais.distinct()
+    
+
+    grupos_disponiveis = GrupoTaxonomico.objects.filter(
+    imagemanimal__in=animais
+    ).distinct().order_by('nome')
 
     paginator = Paginator(animais, 10)
     page_number = request.GET.get('page')
@@ -62,7 +80,7 @@ def fauna(request):
     dados = {
         'page_obj': page_obj,
         'fenomenos': Fenomeno.objects.all().order_by('nome'),
-        'grupos': GrupoTaxonomico.objects.all().order_by('nome'),
+        'grupos': grupos_disponiveis,
         'locais': Local.objects.all().order_by('nome'),
         'search': search or '',
         'fenomeno_selecionado': fenomeno_selecionado,
@@ -82,7 +100,8 @@ def sobre(request):
    
 
 def publicacoes(request):
-    search = request.GET.get('search')
+    search = request.GET.get('search', '').strip()
+    termo = remover_acentos(search)
     tematica = converter_para_int(request.GET.get('tematica'))
     grupo_selecionado = converter_para_int(request.GET.get('grupo'))
     ano = converter_para_int(request.GET.get('ano'))
@@ -90,17 +109,22 @@ def publicacoes(request):
 
     publicacoes = Publicacao.objects.all()
 
-    if search:
-        publicacoes = publicacoes.filter(
-            Q(titulo__icontains=search) |
-            Q(autores__nome__icontains=search)
-        )
+    if termo:
+        publicacoes = [
+            publicacao for publicacao in publicacoes
+            if termo in remover_acentos(publicacao.titulo.lower())
+            or any(termo in remover_acentos(autor.nome.lower()) for autor in publicacao.autores.all())
+        ]
+    else:
+        publicacoes = list(publicacoes)
 
     if tematica:
         publicacoes = publicacoes.filter(tematica_id=tematica)
-
+    
+    #somente grupos que tenham em publicações, para não aparecer grupos sem publicações
     if grupo_selecionado:
         publicacoes = publicacoes.filter(grupo_id=grupo_selecionado)
+
 
     if ano:
         publicacoes = publicacoes.filter(ano=ano)
@@ -108,7 +132,12 @@ def publicacoes(request):
     if tipo_publicacao:
         publicacoes = publicacoes.filter(tipo_id=tipo_publicacao)
 
-    publicacoes = publicacoes.distinct()
+   
+
+    grupos_disponiveis = GrupoTaxonomico.objects.filter(
+    publicacao__in=publicacoes
+    ).distinct().order_by('nome')
+
 
     paginator = Paginator(publicacoes, 10)
     page_number = request.GET.get('page')
@@ -124,7 +153,7 @@ def publicacoes(request):
     dados = {
         'page_obj': page_obj,
         'tematicas': Tematica.objects.all().order_by('nome'),
-        'grupos': GrupoTaxonomico.objects.all().order_by('nome'),
+        'grupos': grupos_disponiveis,
         'anos': Publicacao.objects.values_list('ano', flat=True).distinct().order_by('ano'),
         'tipos_publicacao': TipoPublicacao.objects.all().order_by('nome'),
         'search': search or '',
@@ -139,7 +168,14 @@ def publicacoes(request):
 
 def detalhes_animal(request, animal_id):
     animal = get_object_or_404(ImagemAnimal, id=animal_id)
-    return render(request, 'animais.html', {'animal': animal})
+    registros = ImagemAnimal.objects.select_related(
+    "local",
+    "animal"
+    ).filter(animal=animal.animal)
+    return render(request, 'animais.html', {'animal': animal, 'registros': registros})
 
 def admin(request):
     return render(request, 'admin.html')
+
+def pesquisas(request):
+    return render(request, 'pesquisas.html')

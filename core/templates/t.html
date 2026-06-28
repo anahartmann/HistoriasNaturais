@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pesquisas em Desenvolvimento | Labeco</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "primary": "#012d1d",
+                "surface-container": "#ebedff",
+                "secondary-fixed": "#a1f4c8",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#2c3041",
+                "on-surface": "#171b2b",
+                "on-tertiary-fixed": "#092012",
+                "surface-variant": "#dee1f8",
+                "primary-fixed": "#c1ecd4",
+                "on-error": "#ffffff",
+                "tertiary": "#152b1c",
+                "secondary-fixed-dim": "#86d7ad",
+                "on-secondary-fixed": "#002113",
+                "on-primary-container": "#86af99",
+                "on-primary": "#ffffff",
+                "inverse-on-surface": "#eff0ff",
+                "background": "#faf8ff",
+                "surface": "#faf8ff",
+                "on-primary-fixed": "#002114",
+                "on-error-container": "#93000a",
+                "surface-container-low": "#f3f2ff",
+                "tertiary-container": "#2a4131",
+                "surface-dim": "#d6d9ef",
+                "outline-variant": "#c1c8c2",
+                "on-surface-variant": "#414844",
+                "on-primary-fixed-variant": "#274e3d",
+                "tertiary-fixed": "#cee9d3",
+                "primary-fixed-dim": "#a5d0b9",
+                "on-secondary-fixed-variant": "#005236",
+                "surface-container-high": "#e4e7fe",
+                "on-secondary-container": "#1b724f",
+                "on-tertiary-fixed-variant": "#354c3b",
+                "tertiary-fixed-dim": "#b3cdb7",
+                "on-tertiary-container": "#93ad98",
+                "on-background": "#171b2b",
+                "primary-container": "#1b4332",
+                "surface-bright": "#faf8ff",
+                "secondary": "#116c4a",
+                "on-secondary": "#ffffff",
+                "outline": "#717973",
+                "surface-tint": "#3f6653",
+                "surface-container-highest": "#dee1f8",
+                "secondary-container": "#a1f4c8",
+                "inverse-primary": "#a5d0b9",
+                "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "base": "4px",
+                "xl": "80px",
+                "sm": "16px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "margin-desktop": "auto",
+                "lg": "48px",
+                "md": "24px",
+                "xs": "8px",
+                "max-width": "1200px"
+            },
+            "fontFamily": {
+                "headline-sm": ["Source Serif 4"],
+                "headline-md": ["Source Serif 4"],
+                "display-lg": ["Source Serif 4"],
+                "label-md": ["Hanken Grotesk"],
+                "caption": ["Hanken Grotesk"],
+                "body-md": ["Hanken Grotesk"],
+                "body-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #171b2b;
+        }
+        .research-card:hover {
+            border-color: #116c4a;
+            background-color: #f3f2ff;
+        }
+        .filter-pill.active {
+            background-color: #2a4131;
+            color: #cee9d3;
+        }
+        .status-badge-progress { background-color: #a1f4c8; color: #002113; }
+        .status-badge-collection { background-color: #cee9d3; color: #092012; }
+        .status-badge-analysis { background-color: #c1ecd4; color: #002114; }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
+<div class="flex items-center gap-xs">
+<span class="font-headline-md text-headline-md font-bold text-primary">Labeco</span>
+</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200" href="#">Fauna</a>
+<a class="text-on-surface-variant font-medium hover:text-secondary transition-colors duration-200" href="#">Publications</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Research</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-primary">search</button>
+<button class="bg-primary text-on-primary px-md py-xs rounded-lg font-label-md hover:opacity-90 transition-opacity">Contact Us</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-xl px-margin-mobile md:px-margin-desktop mx-auto max-w-max-width">
+<!-- Hero Section -->
+<header class="mb-lg">
+<h1 class="font-display-lg text-display-lg text-primary mb-xs">Pesquisas em Desenvolvimento</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Acompanhe o panorama das investigações científicas atuais do Labeco. Nosso compromisso é com a transparência acadêmica e a disseminação contínua de conhecimentos sobre a biodiversidade local.
+            </p>
+</header>
+<!-- Filters Section -->
+<section class="mb-lg space-y-md">
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<!-- Keyword Search -->
+<div class="md:col-span-1">
+<label class="font-label-md text-label-md text-primary mb-xs block">Palavra-chave</label>
+<div class="relative">
+<input class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none" placeholder="Buscar título ou pesquisador..." type="text"/>
+</div>
+</div>
+<!-- Dropdown Filters -->
+<div>
+<label class="font-label-md text-label-md text-primary mb-xs block">Status</label>
+<select class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
+<option>Todos os Status</option>
+<option>Em andamento</option>
+<option>Coleta de Dados</option>
+<option>Análise de Dados</option>
+</select>
+</div>
+<div>
+<label class="font-label-md text-label-md text-primary mb-xs block">Nível</label>
+<select class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
+<option>Todos os Níveis</option>
+<option>Iniciação Científica</option>
+<option>Mestrado</option>
+<option>Doutorado</option>
+<option>Pós-Doutorado</option>
+</select>
+</div>
+<div>
+<label class="font-label-md text-label-md text-primary mb-xs block">Grupo Taxonômico</label>
+<select class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
+<option>Todos os Grupos</option>
+<option>Mamíferos</option>
+<option>Aves</option>
+<option>Anfíbios &amp; Répteis</option>
+<option>Flora Tropical</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Type Pills -->
+<div class="flex flex-wrap gap-xs">
+<button class="filter-pill active px-md py-xs rounded-full font-label-md text-label-md border border-tertiary-container transition-all">Todos</button>
+<button class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Em andamento</button>
+<button class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Coleta de Dados</button>
+<button class="filter-pill px-md py-xs rounded-full font-label-md text-label-md bg-white border border-outline-variant text-on-surface-variant hover:border-primary transition-all">Análise de Dados</button>
+</div>
+</section>
+<!-- Research List -->
+<section class="grid grid-cols-1 gap-md">
+<!-- Card 1 -->
+<!-- Card 2 -->
+<div class="research-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
+<div class="flex-1 w-full">
+<div class="flex items-center gap-sm mb-xs">
+<span class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded text-caption font-label-md uppercase text-[10px]">Mestrado</span>
+<span class="status-badge-collection px-3 py-1 rounded-full font-label-md text-[11px] font-bold">Coleta de Dados</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Inventário Fitossociológico de Reservas Urbanas</h3>
+<p class="text-body-md text-on-surface-variant mb-md">Mapeamento de espécies arbóreas e regeneração natural em parques metropolitanos sob pressão urbana constante.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-sm border-t border-outline-variant/30">
+<div>
+<span class="font-label-md text-on-surface-variant block mb-1">Responsáveis</span>
+<div class="flex flex-wrap gap-1">
+<span class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Dr. Roberto Costa</span>
+<span class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Biol. Ana Paula</span>
+</div>
+</div>
+<div>
+<span class="font-label-md text-on-surface-variant block mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">book</span> Publicações Vinculadas
+                            </span>
+<span class="text-caption italic text-outline">Nenhuma publicação vinculada ainda.</span>
+</div>
+</div>
+</div>
+<div class="flex items-center">
+<a class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs whitespace-nowrap" href="#">
+                        Acessar Pesquisa
+                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="research-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
+<div class="flex-1 w-full">
+<div class="flex items-center gap-sm mb-xs">
+<span class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded text-caption font-label-md uppercase text-[10px]">I.C.</span>
+<span class="status-badge-analysis px-3 py-1 rounded-full font-label-md text-[11px] font-bold">Análise de Dados</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Monitoramento de Herpetofauna em Corredores Ecológicos</h3>
+<p class="text-body-md text-on-surface-variant mb-md">Avaliação da eficácia de passagens de fauna para anfíbios e répteis em rodovias que cruzam áreas protegidas.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-sm border-t border-outline-variant/30">
+<div>
+<span class="font-label-md text-on-surface-variant block mb-1">Responsáveis</span>
+<div class="flex flex-wrap gap-1">
+<span class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Dra. Marta Veiga</span>
+<span class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Lucas Mendes</span>
+</div>
+</div>
+<div>
+<span class="font-label-md text-on-surface-variant block mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">book</span> Publicações Vinculadas
+                            </span>
+<ul class="space-y-0.5">
+<li class="text-caption text-secondary font-medium hover:underline cursor-pointer">Protocolos de Monitoramento (2024)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flex items-center">
+<a class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs whitespace-nowrap" href="#">
+                        Acessar Pesquisa
+                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Pagination -->
+<div class="flex justify-center mt-xl gap-xs">
+<button class="w-10 h-10 flex items-center justify-center border border-outline hover:bg-surface-container-high transition-colors rounded-lg">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary font-label-md rounded-lg">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline hover:bg-surface-container-high font-label-md rounded-lg transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline hover:bg-surface-container-high font-label-md rounded-lg transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline hover:bg-surface-container-high transition-colors rounded-lg">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full mt-xl">
+<div class="max-w-max-width mx-auto py-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-sm">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="font-headline-sm text-headline-sm text-on-primary">Labeco</span>
+<p class="font-caption text-caption text-on-primary-container opacity-80">Building bridge between research and conservation. © 2024 Labeco Research Laboratory.</p>
+</div>
+<div class="flex gap-md font-body-md text-body-md">
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">Institutional Access</a>
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">Data Governance</a>
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="flex gap-sm">
+<button class="material-symbols-outlined opacity-80 hover:opacity-100">language</button>
+<button class="material-symbols-outlined opacity-80 hover:opacity-100">share</button>
+</div>
+</div>
+</footer>
+<script>
+        // Filter pills interaction
+        const filterPills = document.querySelectorAll('.filter-pill');
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => {
+                    p.classList.remove('active', 'bg-tertiary-container', 'text-on-tertiary');
+                    p.classList.add('bg-white', 'text-on-surface-variant');
+                });
+                pill.classList.add('active', 'bg-tertiary-container', 'text-on-tertiary');
+                pill.classList.remove('bg-white', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>
