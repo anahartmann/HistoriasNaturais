@@ -20,49 +20,40 @@ Pesquisas
     <!-- Filters Section -->
     <form method="get" class="mb-lg space-y-md">
         <div class="bg-surface-container-low p-md rounded-xl border border-outline-variant">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-md">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-md">
                 <!-- Search Input -->
                 <div class="md:col-span-1">
                     <label class="font-label-md text-label-md text-primary mb-xs block">Palavra-chave</label>
                     <div class="relative">
                         <input
                             class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none"
-                            placeholder="Buscar título ou autor..." value="{{ search }}" type="text" name="search">
+                            placeholder="Buscar título..." value="{{ search }}" type="text" name="search">
                     </div>
                 </div>
                 <!-- Dropdown Filters -->
                 <div>
-                    <label class="font-label-md text-label-md text-primary mb-xs block">Temática</label>
-                    <select name="tematica"
+                    <label class="font-label-md text-label-md text-primary mb-xs block">Responsável</label>
+                    <select name="responsavel"
                         class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option value="">Todas as Temáticas</option>
-                        {% for tematica in tematicas %}
-                        <option value="{{ tematica.id }}" {% if tematica_selecionada == tematica.id %}selected{% endif %}>
-                            {{ tematica.nome }}</option>
+                        <option value="">Todos os Responsáveis</option>
+                        {% for responsavel in responsaveis %}
+                        <option value="{{ responsavel.id }}" {% if responsavel_selecionado == responsavel.id %}selected{% endif %}>
+                            {{ responsavel.nome }}</option>
                         {% endfor %}
                     </select>
                 </div>
+               
                 <div>
-                    <label class="font-label-md text-label-md text-primary mb-xs block">Grupo Taxonômico</label>
-                    <select name="grupo"
+                    <label class="font-label-md text-label-md text-primary mb-xs block">Nível</label>
+                    <select name="nivel"
                         class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option value="">Todos os Grupos</option>
-                        {% for grupo in grupos %}
-                        <option value="{{ grupo.id }}" {% if grupo_selecionado == grupo.id %}selected{% endif %}>
-                            {{ grupo.nome }}</option>
+                        <option value="">Todos os Níveis</option>
+                        {% for nivel in niveis %}
+                        <option value="{{ nivel }}" {% if nivel_selecionado == nivel %}selected{% endif %}>
+                            {{ nivel }}</option>
                         {% endfor %}
                     </select>
-                </div>
-                <div>
-                    <label class="font-label-md text-label-md text-primary mb-xs block">Ano</label>
-                    <select name="ano"
-                        class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
-                        <option value="">Todos os Anos</option>
-                        {% for ano in anos %}
-                        <option value="{{ ano }}" {% if ano_selecionado == ano %}selected{% endif %}>
-                            {{ ano }}</option>
-                        {% endfor %}
-                    </select>
+                           
                 </div>
 
                 <button type="submit"
@@ -74,24 +65,22 @@ Pesquisas
 
         <!-- Type Pills -->
         <div class="flex flex-wrap gap-xs">
-
-            <button type="submit" name="tipo_publicacao" value="" class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
-        {% if not tipo_publicacao_selecionado %}
+            <button type="submit" name="status" value="" class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
+        {% if not status_selecionado %}
             active border-tertiary-container bg-primary-container text-on-primary-container
         {% else %}
             bg-white border-outline-variant text-on-surface-variant hover:border-primary
         {% endif %}">
                 Todos
             </button>
-
-            {% for tipo in tipos_publicacao %}
-            <button type="submit" name="tipo_publicacao" value="{{ tipo.id }}" class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
-        {% if tipo_publicacao_selecionado  ==  tipo.id %}
+            {% for stat in status %}
+            <button type="submit" name="status" value="{{ stat}}" class="filter-pill px-md py-xs rounded-full font-label-md text-label-md border transition-all
+        {% if status_selecionado  ==  stat %}
             active border-tertiary-container bg-primary-container text-on-primary-container
         {% else %}
             bg-white border-outline-variant text-on-surface-variant hover:border-primary
         {% endif %}">
-                {{ tipo.nome }}
+                {{ stat }}
             </button>
             {% endfor %}
 
@@ -102,7 +91,7 @@ Pesquisas
         <!-- Main Results Column -->
         <div class="w-full space-y-md">
             <div class="grid grid-cols-1 gap-gutter">
-
+                {% for pesquisa in page_obj %}
                 <div
                     class="research-card bg-white border border-outline-variant rounded-xl p-md flex flex-col md:flex-row justify-between items-center gap-md transition-all duration-200">
                     <div class="flex-1 w-full">
@@ -110,49 +99,40 @@ Pesquisas
                             <span
                                 class="bg-secondary-container text-on-secondary-container px-xs py-1 rounded text-caption font-label-md uppercase text-[10px]">Doutorado</span>
                             <span
-                                class="status-badge-progress px-3 py-1 rounded-full font-label-md text-[11px] font-bold">Em
-                                andamento</span>
+                                class="status-badge-progress px-3 py-1 rounded-full font-label-md text-[11px] font-bold">
+                            {{ pesquisa.status }}</span>
                         </div>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">Impacto da
-                            Fragmentação Florestal na Dieta de Primatas</h3>
-                        <p class="text-body-md text-on-surface-variant mb-md">Estudo focado na análise isotópica de
-                            amostras biológicas para compreender mudanças tróficas em áreas de Mata Atlântica
-                            fragmentadas.</p>
+                        <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">
+                            {{ pesquisa.titulo }}
+                        </h3>
+                        <p class="text-body-md text-on-surface-variant mb-md">
+                            {{ pesquisa.descricao }}
+                        </p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-sm border-t border-outline-variant/30">
                             <div>
                                 <span class="font-label-md text-on-surface-variant block mb-1">Responsáveis</span>
                                 <div class="flex flex-wrap gap-1">
+                                    {% for autor in pesquisa.pesquisadores.all %}
                                     <span
-                                        class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Dr.
-                                        Henrique Silva</span>
-                                    <span
-                                        class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">Me.
-                                        Laura Ferreira</span>
+                                        class="text-primary font-medium text-xs bg-primary-fixed px-2 py-0.5 rounded">
+                                        {{autor.titulo }} {{ autor.nome }}</span>
+                                        
+                                    {% endfor %}
+                                    
                                 </div>
                             </div>
-                            <div>
-                                <span class="font-label-md text-on-surface-variant block mb-1 flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[16px]">book</span> Publicações
-                                    Vinculadas
-                                </span>
-                                <ul class="space-y-0.5">
-                                    <li class="text-caption text-secondary font-medium hover:underline cursor-pointer">
-                                        Metodologias de Coleta em Fragmentos (2023)</li>
-                                    <li class="text-caption text-secondary font-medium hover:underline cursor-pointer">
-                                        Ecologia de Primatas: Um Guia (2022)</li>
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="flex items-center">
                         <a class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity flex items-center gap-xs whitespace-nowrap"
-                            href="#">
-                            Acessar Pesquisa
+                            href="/publicacoes/?pesquisa={{ pesquisa.id }}">
+                            Ver publicações
                             <span class="material-symbols-outlined text-body-md">arrow_forward</span>
                         </a>
                     </div>
                 </div>
-               
+               {% endfor %}
             </div>
         </div>
 

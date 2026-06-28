@@ -21,7 +21,7 @@ Publicações
     <!-- Filters Section -->
     <form method="get" class="mb-lg space-y-md">
         <div class="bg-surface-container-low p-md rounded-xl border border-outline-variant">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-md">
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-md">
                 <!-- Search Input -->
                 <div class="md:col-span-1">
                     <label class="font-label-md text-label-md text-primary mb-xs block">Palavra-chave</label>
@@ -40,6 +40,17 @@ Publicações
                         {% for tematica in tematicas %}
                         <option value="{{ tematica.id }}" {% if tematica_selecionada == tematica.id %}selected{% endif %}>
                             {{ tematica.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="font-label-md text-label-md text-primary mb-xs block">Pesquisa</label>
+                    <select name="pesquisa"
+                        class="w-full bg-white border-b border-outline focus:border-secondary focus:ring-0 px-xs py-2 font-body-md text-body-md outline-none appearance-none">
+                        <option value = "">Todas as Pesquisas</option>
+                        {% for pesquisa in pesquisas %}
+                        <option value="{{ pesquisa.id }}" {% if pesquisa_selecionada == pesquisa.id %}selected{% endif %}>
+                            {{ pesquisa.titulo }}</option>
                         {% endfor %}
                     </select>
                 </div>
