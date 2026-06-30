@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Animal, Fenomeno, GrupoTaxonomico, ImagemAnimal, Local, Pesquisa, Pesquisador, Publicacao, Tematica, TipoPublicacao
 import unicodedata
 
+
 def remover_acentos(texto):
     if not texto:
         return ''
@@ -243,3 +244,8 @@ def pesquisas(request):
     }
     
     return render(request, 'pesquisas.html', dados)
+
+def gerar_erro_500(request):
+  
+    divisao_invalida = 1 / 0 
+    return render(request, 'index.html')

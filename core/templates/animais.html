@@ -10,10 +10,18 @@ Acervo
     <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="flex flex-col gap-lg">
             <!-- Single Large Photo -->
-            <div
-                class=" aspect-video rounded-xl overflow-hidden ">
-                <img class="w-full h-full object-contain cursor-pointer" src="{{ animal.foto.url }}"
-                    alt="{{ animal.animal.nome_comum }}" onclick="abrirImagem('{{ animal.foto.url }}')">
+            <div class="aspect-video rounded-xl overflow-hidden">
+                {% with media_name=animal.midia.name|default_if_none:''|lower %}
+                {% if media_name|slice:'-4:' == '.mp4' or media_name|slice:'-5:' == '.webm' or media_name|slice:'-4:' == '.ogg' or media_name|slice:'-4:' == '.mov' or media_name|slice:'-4:' == '.m4v' or media_name|slice:'-4:' == '.avi' %}
+                <video class="w-full h-full object-contain" controls preload="metadata" playsinline>
+                    <source src="{{ animal.midia.url }}">
+                    Seu navegador não suporta vídeos.
+                </video>
+                {% else %}
+                <img class="w-full h-full object-contain cursor-pointer" src="{{ animal.midia.url }}"
+                    alt="{{ animal.animal.nome_comum }}" onclick="abrirImagem('{{ animal.midia.url }}')">
+                {% endif %}
+                {% endwith %}
             </div>
             <!-- Species Information -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-start">
@@ -85,7 +93,7 @@ const registros = [
     nome: "{{ registro.animal.nome_comum|escapejs }}",
     latitude: {{ registro.local.latitude }},
     longitude: {{ registro.local.longitude }},
-    foto: "{{ registro.foto.url }}",
+    foto: "{{ registro.midia.url }}",
     especie: "{{ registro.animal.nome_cientifico|escapejs }}",
     fenomeno: "{{ registro.fenomeno|escapejs }}",
     atual: {% if registro.id == animal.id %}true{% else %}false{% endif %}

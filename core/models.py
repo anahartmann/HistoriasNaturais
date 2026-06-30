@@ -28,7 +28,7 @@ class ImagemAnimal(models.Model):
     animal = models.ForeignKey('core.Animal', verbose_name='Animal', on_delete=models.CASCADE)
     fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
     local = models.ForeignKey('core.Local', verbose_name='Locais', on_delete=models.CASCADE)
-    foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)})
+    midia = models.FileField('Mídia (Foto ou Vídeo)', upload_to=buscar_ext, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Imagem de Animal'

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block titulo %}Página não encontrada{% endblock %}
+{% block content %}
+    <!-- Main Content: 404 Section -->
+    <main class="flex-grow flex items-center justify-center pt-xl pb-xl px-margin-mobile">
+        <div class="max-w-max-width mx-auto w-full text-center flex flex-col items-center">
+           
+           
+            <!-- Typography Content -->
+            <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-xs">404</h1>
+            <p class="font-headline-sm text-headline-sm text-on-surface-variant max-w-xl mx-auto mb-md italic">
+                Ops! Parece que esta trilha não leva a lugar nenhum.
+            </p>
+            <p class="font-body-lg text-body-lg text-on-surface-variant opacity-80 max-w-lg mx-auto mb-lg">
+                O habitat que você está procurando pode ter mudado de endereço ou nunca ter existido neste ecossistema
+                digital.
+            </p>
+            <!-- Action Button -->
+            <a class="inline-flex items-center gap-xs bg-primary text-on-primary font-label-md text-label-md px-xl py-md rounded-xl hover:bg-secondary transition-all duration-300 group"
+                href="/">
+                <span class="material-symbols-outlined">home</span>
+                Voltar ao Início
+            </a>
+            <!-- Search Suggestion -->
+            
+        </div>
+    </main>
+{% endblock %}

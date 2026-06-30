@@ -126,37 +126,23 @@
             font-family: 'Hanken Grotesk', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
-        .link-nav.ativo {
-            color: #012d1d;
-            font-weight: 700;
-            border-bottom: 2px solid #012d1d;
-            padding-bottom: 4px;
-        }
-
-        .dark .link-nav.ativo {
-            color: #a1f4c8;
-            border-bottom-color: #a1f4c8;
-        }
     </style>
 </head>
 
 <body class="bg-surface text-on-surface">
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <!-- TopNavBar -->
     <nav
         class="bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-outline sticky top-0 z-50 transition-colors duration-200">
         <div
             class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto h-16">
-            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">
-                Histórias Naturais
+            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Historias Naturais
             </div>
-            <div id="nav-principal" class="hidden md:flex gap-md items-center">
-                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+            <div class="hidden md:flex gap-md items-center">
+                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
                     href="{% url 'index' %}">Início</a>
-                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
                     href="{% url 'sobre' %}">Sobre</a>
-                <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
+                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
                     href="{% url 'pesquisas' %}">Pesquisas</a>
 
                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
@@ -164,41 +150,17 @@
 
                 <a class="link-nav text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-primary transition-colors duration-200 font-label-md text-label-md"
                     href="{% url 'publicacoes' %}">Publicações</a>
-
             </div>
-            <div class="flex items-center gap-xs">
-                <button id="mobile-menu-open" aria-label="Abrir menu"
-                    class="md:hidden p-2 rounded-md text-primary hover:bg-surface-container transition-colors">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
-
-                <a class="hidden md:inline-flex bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity"
+            <div class="flex items-center gap-xs"><button id="mobile-menu-open"
+                    class="md:hidden text-primary p-xs flex items-center justify-center"><span
+                        class="material-symbols-outlined">menu</span></button>
+                <div
+                    class="hidden md:flex items-center bg-surface-container-low px-xs py-1 rounded-full border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+                </div>
+                 <a class="bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity"
                     href="{% url 'admin' %}">Acesso
                     Restrito</a>
             </div>
         </div>
     </nav>
-
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/40 z-40 hidden"></div>
-    <aside id="mobile-menu"
-        class="fixed inset-y-0 right-0 w-72 max-w-[85vw] bg-surface z-50 transform translate-x-full transition-transform duration-300 md:hidden shadow-xl">
-        <div class="p-4 border-b border-outline-variant flex items-center justify-between">
-            <div class="font-headline-md text-headline-md font-bold text-primary">Menu</div>
-            <button id="mobile-menu-close" aria-label="Fechar menu"
-                class="p-2 rounded-md text-primary hover:bg-surface-container transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        <nav class="p-4 flex flex-col gap-2">
-            <a class="link-nav text-on-surface-variant font-label-md text-label-md" href="{% url 'index' %}">Início</a>
-            <a class="link-nav text-on-surface-variant font-label-md text-label-md" href="{% url 'sobre' %}">Sobre</a>
-            <a class="link-nav text-on-surface-variant font-label-md text-label-md"
-                href="{% url 'pesquisas' %}">Pesquisas</a>
-            <a class="link-nav text-on-surface-variant font-label-md text-label-md" href="{% url 'fauna' %}">Fauna</a>
-            <a class="link-nav text-on-surface-variant font-label-md text-label-md"
-                href="{% url 'publicacoes' %}">Publicações</a>
-            <a class="mt-4 bg-primary text-on-primary px-sm py-2 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity text-center"
-                href="{% url 'admin' %}">Acesso
-                Restrito</a>
-        </nav>
-    </aside>

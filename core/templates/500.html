@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %}Erro Interno do Servidor{% endblock %}
+{% block content %}
+<!-- Main Canvas -->
+<main class="flex-grow flex items-center justify-center relative overflow-hidden px-margin-mobile">
+    <!-- Background Atmospheric Element -->
+    <div class="absolute inset-0 error-glow -z-10"></div>
+    <div class="max-w-max-width w-full mx-auto text-center py-xl">
+        <div class="flex flex-col items-center gap-md animate-in fade-in slide-in-from-bottom-4 duration-1000">
+
+            <!-- Error Title -->
+            <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">500
+            </h1>
+            <!-- Message -->
+            <div class="max-w-xl mx-auto space-y-sm">
+                <h2 class="font-headline-sm text-headline-sm text-tertiary">Instabilidade no Ecossistema</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Tivemos um problema técnico em nosso ecossistema digital. Nossa equipe de pesquisadores já está
+                    verificando as causas para restaurar o equilíbrio do sistema.
+                </p>
+            </div>
+            <!-- CTA Actions -->
+            <div class="flex flex-col sm:flex-row gap-sm mt-md">
+                <button
+                    class="flex items-center justify-center gap-xs bg-primary text-on-primary px-lg py-md rounded-lg font-label-md text-label-md hover:bg-tertiary transition-all shadow-sm active:scale-95"
+                    onclick="window.location.reload()">
+                    <span class="material-symbols-outlined text-md">refresh</span>
+                    Recarregar Página
+                </button>
+                <a class="flex items-center justify-center gap-xs border border-primary text-primary px-lg py-md rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-all active:scale-95"
+                    href="/">
+                    <span class="material-symbols-outlined text-md">home</span>
+                    Voltar ao Início
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+   
+
+</main>
+{% endblock %}

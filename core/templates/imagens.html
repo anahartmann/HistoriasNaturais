@@ -86,10 +86,17 @@ Acervo
                 <a href="{% url 'detalhes_animal' animal.id %}"
                     class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col hover:border-primary transition-all duration-300 group cursor-pointer no-underline">
                     <div class="relative aspect-video overflow-hidden">
-
+                        {% with media_name=animal.midia.name|default_if_none:''|lower %}
+                        {% if media_name|slice:'-4:' == '.mp4' or media_name|slice:'-5:' == '.webm' or media_name|slice:'-4:' == '.ogg' or media_name|slice:'-4:' == '.mov' or media_name|slice:'-4:' == '.m4v' or media_name|slice:'-4:' == '.avi' %}
+                        <video class="w-full h-full object-contain" controls preload="metadata" playsinline>
+                            <source src="{{ animal.midia.url }}">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        {% else %}
                         <img class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                            src="{{ animal.foto.url }}" alt="{{ animal.nome_comum }}">
-
+                            src="{{ animal.midia.url }}" alt="{{ animal.nome_comum }}">
+                        {% endif %}
+                        {% endwith %}
                     </div>
                     <div class="p-md">
                         <h4 class="font-headline-sm text-headline-sm text-primary">{{ animal.animal.nome_comum }}</h4>

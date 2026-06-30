@@ -136,6 +136,10 @@ Publicações
                                 {{ publicacao.tematica.nome }}</span>
                             <span class="text-caption bg-surface-container px-xs py-1 rounded">
                                 {{ publicacao.grupo.nome }}</span>
+                            {% if publicacao.pesquisa %}
+                             <span class="text-caption bg-surface-container px-xs py-1 rounded">
+                                {{ publicacao.pesquisa.titulo }}</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="flex items-center">
