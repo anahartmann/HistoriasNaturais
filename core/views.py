@@ -61,7 +61,7 @@ def fauna(request):
         animais = list(animais) 
         
     grupos_disponiveis = GrupoTaxonomico.objects.filter(
-    imagemanimal__in=animais
+    animal__imagemanimal__in=animais
     ).distinct().order_by('nome')
 
     fenomenos_disponiveis = Fenomeno.objects.filter(

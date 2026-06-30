@@ -16,6 +16,7 @@ def buscar_ext(_instance, filename):
 class Animal(models.Model):
     nome_comum = models.CharField('Nome Comum', max_length=100)
     nome_cientifico = models.CharField('Nome Científico', max_length=100)
+    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
     class Meta:
         verbose_name = 'Animal'
         verbose_name_plural = 'Animais'
@@ -25,7 +26,6 @@ class Animal(models.Model):
     
 class ImagemAnimal(models.Model):
     animal = models.ForeignKey('core.Animal', verbose_name='Animal', on_delete=models.CASCADE)
-    grupo = models.ForeignKey('core.GrupoTaxonomico', verbose_name='Grupo Taxonômico', on_delete=models.CASCADE)
     fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
     local = models.ForeignKey('core.Local', verbose_name='Locais', on_delete=models.CASCADE)
     foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)})
@@ -128,16 +128,6 @@ class Local(models.Model):
     def __str__(self):
         return self.nome
 
-class Pessoa(models.Model):
-    nome = models.CharField('Nome', max_length=100)
-    email = models.EmailField('E-mail', max_length=100)
-    admin = models.BooleanField('Administrador?', default=False)
-    class Meta:
-        verbose_name = 'Pessoa'
-        verbose_name_plural = 'Pessoas'
-
-    def __str__(self):
-        return self.nome
     
 class Pesquisa(models.Model):
     titulo = models.CharField('Título', max_length=100)
