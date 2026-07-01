@@ -128,9 +128,9 @@ Publicações
                         </div>
                         <h3 class="font-headline-sm text-headline-sm text-primary mb-xs leading-tight">
                             {{ publicacao.titulo }}</h3>
-                        {% for autor in publicacao.autores.all %}
-                        <p class="text-body-md text-on-surface-variant mb-sm">{{ autor.nome }}</p>
-                        {% endfor %}
+                        
+                        <p class="text-body-md text-on-surface-variant mb-sm">{% for autor in publicacao.autores.all %} {{ autor.nome }}; {% endfor %}</p>
+                      
                         <div class="flex flex-wrap gap-xs">
                             <span class="text-caption bg-surface-container px-xs py-1 rounded">
                                 {{ publicacao.tematica.nome }}</span>
@@ -153,7 +153,39 @@ Publicações
                 {% endfor %}
             </div>
         </div>
+ {% if page_obj.has_other_pages %}
+            <div class="mt-lg flex justify-center items-center gap-xs">
 
+                {% if page_obj.has_previous %}
+                <a href="?{{ page_prefix }}page={{ page_obj.previous_page_number }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <a href="?{{ page_prefix }}page={{ num }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">
+                    {{ num }}
+                </a>
+                {% else %}
+                <a href="?{{ page_prefix }}page={{ num }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    {{ num }}
+                </a>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?{{ page_prefix }}page={{ page_obj.next_page_number }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+                {% endif %}
+
+            </div>
+            {% endif %}
     </div>
 </main>
 

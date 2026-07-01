@@ -25,30 +25,40 @@ class Animal(models.Model):
         return self.nome_comum
     
 class ImagemAnimal(models.Model):
-    animal = models.ForeignKey('core.Animal', verbose_name='Animal', on_delete=models.CASCADE)
+    animais = models.ManyToManyField('core.Animal', verbose_name='Animais', db_table='core_imagemanimal_animais')
     fenomeno = models.ForeignKey('core.Fenomeno', verbose_name='Fenômeno', on_delete=models.CASCADE)
     local = models.ForeignKey('core.Local', verbose_name='Locais', on_delete=models.CASCADE)
-    midia = models.FileField('Mídia (Foto ou Vídeo)', upload_to=buscar_ext, null=True, blank=True)
+    midia = models.FileField('Mídia (Foto ou Vídeo)', upload_to=buscar_ext)
 
     class Meta:
         verbose_name = 'Imagem de Animal'
         verbose_name_plural = 'Imagens de Animais'
+
     def __str__(self):
-        return f'{self.animal.nome_comum} - {self.fenomeno.nome} - {self.local.nome}'
+        nomes = ', '.join(animal.nome_comum for animal in self.animais.all()[:3])
+        return f'{nomes or "Sem animal"} - {self.fenomeno.nome} - {self.local.nome}'
 
 class Pesquisador(models.Model):
     nome = models.CharField('Nome', max_length=100)
     email = models.EmailField('E-mail', max_length=100)
     #titulo so pode ser doutor ou mestre, por isso é uma escolha entre essas duas opções
     TITULOS = [
-        ('Doutor', 'Doutor'),
-        ('Mestre', 'Mestre'),
+        
         ('Graduando', 'Graduando'),
+        ('Graduanda', 'Graduanda'),
         ('Pós-Doutor', 'Pós-Doutor'),
+        ('Pós-Doutora', 'Pós-Doutora'),
+        ('Pós-Doutorando', 'Pós-Doutorando'),
+        ('Pós-Doutoranda', 'Pós-Doutoranda'),
         ('Mestrando', 'Mestrando'),
+        ('Mestranda', 'Mestranda'),
         ('Doutorando', 'Doutorando'),
+        ('Doutoranda', 'Doutoranda'),
+        ('Doutor', 'Doutor'),
+        ('Doutora', 'Doutora'),
+        ('Mestre', 'Mestre'),
     ]
-    titulo = models.CharField('Título', max_length=10, choices=TITULOS, default='Graduando')
+    titulo = models.CharField('Título', max_length=20, choices=TITULOS, default='Graduando')
     lattes = models.URLField('Lattes', max_length=1000, null=True, blank=True)
     foto = StdImageField('Foto', upload_to=buscar_ext, variations={'thumb': (300, 300)}, null=True, blank=True)
 
@@ -60,7 +70,7 @@ class Pesquisador(models.Model):
 
 class Publicacao(models.Model):
     #tipo de publicação (artigo, livro, capítulo de livro), temática, autores, grupo taxonômico e ano de publicação.
-    titulo = models.CharField('Título', max_length=100)
+    titulo = models.CharField('Título', max_length=300)
     tipo = models.ForeignKey('core.TipoPublicacao', verbose_name='Tipo de Publicação', on_delete=models.CASCADE)
     tematica = models.ForeignKey('core.Tematica', verbose_name='Temática', on_delete=models.CASCADE)
     autores = models.ManyToManyField('core.Pesquisador', verbose_name='Autores')

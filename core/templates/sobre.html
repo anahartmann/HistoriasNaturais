@@ -67,10 +67,14 @@ Sobre
             <p class="text-on-tertiary-fixed-variant max-w-2xl mx-auto font-body-md text-body-md">Conheça os
                 especialistas que lideram nossas investigações e projetos de conservação na UFFS.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md center">
-            {% for pesquisador in pesquisadores %}
-            <div class="bento-card bg-white border border-outline-variant overflow-hidden group"
-                style="opacity: 1; transform: translateY(0px); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+        <h2 class=" text-center mb-lg font-display-lg text-display-lg text-primary mb-sm">Os responsáveis pela pesquisa
+        </h2>
+        <br>
+
+        <div class="flex flex-wrap justify-center gap-md">
+            {% for pesquisador in responsaveis %}
+            <div
+                class="bento-card bg-white border border-outline-variant overflow-hidden group mx-auto w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] max-w-[360px]">
                 <div class="h-64 overflow-hidden relative">
 
                     {% if pesquisador.foto %}
@@ -81,7 +85,40 @@ Sobre
 
                 </div>
                 <div class="p-md">
-                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">{{pesquisador.titulo }}
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base"> <b>{{pesquisador.titulo }}</b>
+                    </h4>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">
+                        {{pesquisador.nome }}</h4>
+                    <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
+                        target="_blank">Lattes</a>
+                    <p class="text-caption text-on-surface-variant leading-tight">{{ pesquisador.email }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% if pos_doutores %}
+        <br>
+        <h2 class=" text-center mb-lg font-display-lg text-display-lg text-primary mb-sm">Pós-Doutorandos</h2>
+        <br>
+
+        <div class="flex flex-wrap justify-center gap-md">
+            {% for pesquisador in pos_doutores %}
+            <div
+                class="bento-card bg-white border border-outline-variant overflow-hidden group mx-auto w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] max-w-[360px]">
+                <div class="h-64 overflow-hidden relative">
+
+                    {% if pesquisador.foto %}
+                    <img src="{{ pesquisador.foto.url }}" alt="{{ pesquisador.nome }}">
+                    {% else %}
+                    <img src="{% static 'img/naoidentificado.jpg' %}" alt="Imagem não identificada">
+                    {% endif %}
+
+                </div>
+                <div class="p-md">
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base"> <b>{{pesquisador.titulo }}</b>
+                    </h4>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">
                         {{pesquisador.nome }}</h4>
                     <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
                         target="_blank">Lattes</a>
@@ -90,6 +127,103 @@ Sobre
             </div>
             {% endfor %}
         </div>
+        {% endif %}
+        {% if doutorandos %}
+        <br>
+        <h2 class=" text-center mb-lg font-display-lg text-display-lg text-primary mb-sm">Doutorandos</h2>
+        <br>
+
+        <div class="flex flex-wrap justify-center gap-md">
+            {% for pesquisador in doutorandos %}
+            <div
+                class="bento-card bg-white border border-outline-variant overflow-hidden group mx-auto w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] max-w-[360px]">
+                <div class="h-64 overflow-hidden relative">
+
+                    {% if pesquisador.foto %}
+                    <img src="{{ pesquisador.foto.url }}" alt="{{ pesquisador.nome }}">
+                    {% else %}
+                    <img src="{% static 'img/naoidentificado.jpg' %}" alt="Imagem não identificada">
+                    {% endif %}
+
+                </div>
+                <div class="p-md">
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base"> <b>{{pesquisador.titulo }}</b>
+                    </h4>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">
+                        {{pesquisador.nome }}</h4>
+                    <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
+                        target="_blank">Lattes</a>
+                    <p class="text-caption text-on-surface-variant leading-tight">{{ pesquisador.email }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+        {% if mestrandos %}
+        <br>
+        <h2 class=" text-center mb-lg font-display-lg text-display-lg text-primary mb-sm">Mestrandos</h2>
+        <br>
+
+        <div class="flex flex-wrap justify-center gap-md">
+            {% for pesquisador in mestrandos %}
+            <div
+                class="bento-card bg-white border border-outline-variant overflow-hidden group mx-auto w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] max-w-[360px]">
+                <div class="h-64 overflow-hidden relative">
+
+                    {% if pesquisador.foto %}
+                    <img src="{{ pesquisador.foto.url }}" alt="{{ pesquisador.nome }}">
+                    {% else %}
+                    <img src="{% static 'img/naoidentificado.jpg' %}" alt="Imagem não identificada">
+                    {% endif %}
+
+                </div>
+                <div class="p-md">
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base"> <b>{{pesquisador.titulo }}</b>
+                    </h4>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">
+                        {{pesquisador.nome }}</h4>
+                    <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
+                        target="_blank">Lattes</a>
+                    <p class="text-caption text-on-surface-variant leading-tight">{{ pesquisador.email }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+        {% if graduandos %}
+        <br>
+        <h2 class=" text-center mb-lg font-display-lg text-display-lg text-primary mb-sm">Graduandos</h2>
+        <br>
+
+        <div class="flex flex-wrap justify-center gap-md">
+            {% for pesquisador in graduandos %}
+            <div
+                class="bento-card bg-white border border-outline-variant overflow-hidden group mx-auto w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)] max-w-[360px]">
+                <div class="h-64 overflow-hidden relative">
+
+                    {% if pesquisador.foto %}
+                    <img src="{{ pesquisador.foto.url }}" alt="{{ pesquisador.nome }}">
+                    {% else %}
+                    <img src="{% static 'img/naoidentificado.jpg' %}" alt="Imagem não identificada">
+                    {% endif %}
+
+                </div>
+                <div class="p-md">
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base"> <b>{{pesquisador.titulo }}</b>
+                    </h4>
+                    <h4 class="font-headline-sm text-headline-sm text-primary mb-base">
+                        {{pesquisador.nome }}</h4>
+                    <a class="text-secondary font-label-md text-label-md mb-sm" href="{{ pesquisador.lattes }}"
+                        target="_blank">Lattes</a>
+                    <p class="text-caption text-on-surface-variant leading-tight">{{ pesquisador.email }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
     </div>
 </section>
 <!-- Values Section (Tonal Layer) -->

@@ -41,13 +41,14 @@ def fauna(request):
     grupo_selecionado = converter_para_int(request.GET.get('grupo'))
     local_selecionado = converter_para_int(request.GET.get('local'))
 
-    animais = ImagemAnimal.objects.all()
+  
+    animais = ImagemAnimal.objects.distinct()
 
     if fenomeno_selecionado:
         animais = animais.filter(fenomeno_id=fenomeno_selecionado)
 
     if grupo_selecionado:
-        animais = animais.filter(grupo_id=grupo_selecionado)
+        animais = animais.filter(animais__grupo_id=grupo_selecionado)
 
     if local_selecionado:
         animais = animais.filter(local__id=local_selecionado)
@@ -55,17 +56,25 @@ def fauna(request):
     if termo:
         animais = [
             animal for animal in animais
-            if termo in remover_acentos(animal.animal.nome_comum.lower())
-            or termo in remover_acentos(animal.animal.nome_cientifico.lower())
+            if any(
+                termo in remover_acentos(animal_instance.nome_comum.lower())
+                or termo in remover_acentos(animal_instance.nome_cientifico.lower())
+                for animal_instance in animal.animais.all()
+            )
         ]
-    else:
-        animais = list(animais) 
+    
+    # Apply ordering after filtering to avoid distinct() issues
+    animais = sorted(animais, key=lambda x: x.animais.first().nome_comum if x.animais.exists() else '') 
         
     grupos_disponiveis = GrupoTaxonomico.objects.filter(
     animal__imagemanimal__in=animais
     ).distinct().order_by('nome')
 
     fenomenos_disponiveis = Fenomeno.objects.filter(
+    imagemanimal__in=animais
+    ).distinct().order_by('nome')
+
+    locais_disponiveis = Local.objects.filter(
     imagemanimal__in=animais
     ).distinct().order_by('nome')
 
@@ -84,7 +93,7 @@ def fauna(request):
         'page_obj': page_obj,
         'fenomenos': fenomenos_disponiveis,
         'grupos': grupos_disponiveis,
-        'locais': Local.objects.all().order_by('nome'),
+        'locais': locais_disponiveis,
         'search': search or '',
         'fenomeno_selecionado': fenomeno_selecionado,
         'grupo_selecionado': grupo_selecionado,
@@ -98,9 +107,15 @@ def index(request):
     return render(request, 'index.html')
 
 def sobre(request):
-    pesquisadores = Pesquisador.objects.all()
-    return render(request, 'sobre.html', {'pesquisadores': pesquisadores})
-   
+    pesquisadores = Pesquisador.objects.all().order_by('nome')
+    responsaveis = pesquisadores.filter(titulo__in=['Pós-Doutor', 'Pós-Doutora', 'Doutor', 'Doutora', 'Mestre'])
+    graduandos = pesquisadores.filter(titulo__in=['Graduando', 'Graduanda'])
+    mestrandos = pesquisadores.filter(titulo__in=['Mestrando', 'Mestranda'])
+    doutorandos = pesquisadores.filter(titulo__in=['Doutorando', 'Doutoranda'])
+    pos_doutores = pesquisadores.filter(titulo__in=['Pós-Doutorando', 'Pós-Doutoranda'])
+    return render(request, 'sobre.html', 
+                  {'pesquisadores': pesquisadores, 'graduandos': graduandos, 'mestrandos': mestrandos, 'doutorandos': doutorandos, 'pos_doutores': pos_doutores, 'responsaveis': responsaveis})
+
 
 def publicacoes(request):
     search = request.GET.get('search', '').strip()
@@ -111,7 +126,7 @@ def publicacoes(request):
     tipo_publicacao = converter_para_int(request.GET.get('tipo_publicacao'))
     pesquisas = converter_para_int(request.GET.get('pesquisa'))
 
-    publicacoes = Publicacao.objects.all()
+    publicacoes = Publicacao.objects.all().order_by('titulo')
 
     if tematica:
         publicacoes = publicacoes.filter(tematica_id=tematica)
@@ -149,7 +164,7 @@ def publicacoes(request):
     publicacao__in=publicacoes
     ).distinct().order_by('nome')
         
-    paginator = Paginator(publicacoes, 10)
+    paginator = Paginator(publicacoes, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -181,9 +196,8 @@ def publicacoes(request):
 def detalhes_animal(request, animal_id):
     animal = get_object_or_404(ImagemAnimal, id=animal_id)
     registros = ImagemAnimal.objects.select_related(
-    "local",
-    "animal"
-    ).filter(animal=animal.animal)
+        "local"
+    ).filter(animais__in=animal.animais.all()).distinct()
     return render(request, 'animais.html', {'animal': animal, 'registros': registros})
 
 def admin(request):
@@ -195,9 +209,8 @@ def pesquisas(request):
     responsavel = converter_para_int(request.GET.get('responsavel'))
     nivel = converter_para_int(request.GET.get('nivel'))
 
-    pesquisas = Pesquisa.objects.all()
+    pesquisas = Pesquisa.objects.all().order_by('titulo')
     
-    #pode ter mais de um repsonsavel, por isso é necessario filtrar com o metodo filter e nao get
     if responsavel:
         pesquisas = pesquisas.filter(pesquisadores__id=responsavel)
 
@@ -220,7 +233,7 @@ def pesquisas(request):
     else:
         pesquisas = list(pesquisas)
 
-    paginator = Paginator(pesquisas, 10)
+    paginator = Paginator(pesquisas, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

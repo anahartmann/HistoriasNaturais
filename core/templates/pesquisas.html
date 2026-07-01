@@ -135,7 +135,39 @@ Pesquisas
                {% endfor %}
             </div>
         </div>
+ {% if page_obj.has_other_pages %}
+            <div class="mt-lg flex justify-center items-center gap-xs">
 
+                {% if page_obj.has_previous %}
+                <a href="?{{ page_prefix }}page={{ page_obj.previous_page_number }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <a href="?{{ page_prefix }}page={{ num }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">
+                    {{ num }}
+                </a>
+                {% else %}
+                <a href="?{{ page_prefix }}page={{ num }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    {{ num }}
+                </a>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?{{ page_prefix }}page={{ page_obj.next_page_number }}"
+                    class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+                {% endif %}
+
+            </div>
+            {% endif %}
     </div>
 </main>
 

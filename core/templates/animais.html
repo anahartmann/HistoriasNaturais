@@ -19,17 +19,18 @@ Acervo
                 </video>
                 {% else %}
                 <img class="w-full h-full object-contain cursor-pointer" src="{{ animal.midia.url }}"
-                    alt="{{ animal.animal.nome_comum }}" onclick="abrirImagem('{{ animal.midia.url }}')">
+                    alt="{{ animal.animais.first.nome_comum|default:'Animal' }}" onclick="abrirImagem('{{ animal.midia.url }}')">
                 {% endif %}
                 {% endwith %}
             </div>
             <!-- Species Information -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-start">
                 <div>
-                    <h1 class="font-display-lg text-display-lg text-primary mb-1">{{ animal.animal.nome_comum }}</h1>
+                    {% for animal_instance in animal.animais.all %}
+                    <h1 class="font-display-lg text-display-lg text-primary mb-1">{{ animal_instance.nome_comum }}</h1>
                     <p class="font-headline-sm text-headline-sm text-outline italic mb-lg">
-                        {{animal.animal.nome_cientifico }}</p>
-
+                        {{ animal_instance.nome_cientifico }}</p>
+                    {% endfor %}
                 </div>
                 <div class="space-y-md">
                     <div class="p-md bg-tertiary-fixed/30 border border-tertiary-fixed rounded-xl">
@@ -40,7 +41,7 @@ Acervo
                     </div>
                     <div class="p-md bg-surface border border-outline-variant rounded-xl">
                         <h2 class="font-label-md text-primary uppercase mb-base">Grupo Taxonômico</h2>
-                        <p class="font-body-lg text-on-surface leading-relaxed">{{ animal.animal.grupo.nome }}</p>
+                        <p class="font-body-lg text-on-surface leading-relaxed">{{ animal.animais.first.grupo.nome|default:'Sem grupo' }}</p>
                     </div>
                 </div>
             </div>
@@ -65,7 +66,7 @@ Acervo
                         <div class="p-md bg-surface border border-outline-variant rounded-xl h-full">
                             <h3 class="font-label-md text-primary uppercase mb-base">Mapa de Ocorrência</h3>
                             <p class="font-body-md text-on-surface-variant mb-md">Distribuição geográfica e outros
-                                avistamentos de {{ animal.animal.nome_cientifico }}.</p>
+                                avistamentos de {{ animal.animais.first.nome_cientifico|default:'esta espécie' }}.</p>
                             <div class="aspect-video rounded-lg overflow-hidden border border-outline-variant">
                                 <div id="map2" class="w-full h-full"></div>
                             </div>
@@ -90,11 +91,11 @@ const registros = [
 {% for registro in registros %}
 {
     id: {{ registro.id }},
-    nome: "{{ registro.animal.nome_comum|escapejs }}",
+    nome: "{{ registro.animais.first.nome_comum|default:'Animal'|escapejs }}",
     latitude: {{ registro.local.latitude }},
     longitude: {{ registro.local.longitude }},
     foto: "{{ registro.midia.url }}",
-    especie: "{{ registro.animal.nome_cientifico|escapejs }}",
+    especie: "{{ registro.animais.first.nome_cientifico|default:'Sem identificação'|escapejs }}",
     fenomeno: "{{ registro.fenomeno|escapejs }}",
     atual: {% if registro.id == animal.id %}true{% else %}false{% endif %}
 },

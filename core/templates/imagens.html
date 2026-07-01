@@ -99,14 +99,19 @@ Acervo
                         {% endwith %}
                     </div>
                     <div class="p-md">
-                        <h4 class="font-headline-sm text-headline-sm text-primary">{{ animal.animal.nome_comum }}</h4>
+                        {% for animal_instance in animal.animais.all %}
+                        <h4 class="font-headline-sm text-headline-sm text-primary">{{ animal_instance.nome_comum }}</h4>
                         <p class="font-body-md text-body-md italic text-on-surface-variant mb-xs">
-                            {{ animal.animal.nome_cientifico }}</p>
-                        </p>
+                            {{ animal_instance.nome_cientifico }}</p>
+                        </p> 
+                        {% endfor %}
                         <div class="flex gap-xs mt-sm">
+                            {% for animal_instance in animal.animais.all %}
                             <span
                                 class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">
-                                {{ animal.animal.grupo.nome }}</span>
+                                {{ animal_instance.grupo.nome }}</span>
+                           {% endfor %}
+                        
                             <span
                                 class="bg-surface-container px-2 py-0.5 rounded-full text-[11px] text-on-surface-variant uppercase font-bold tracking-tight">
                                 {{animal.fenomeno.nome }}</span>
@@ -114,8 +119,6 @@ Acervo
                     </div>
                 </a>
                 {% endfor %}
-
-
             </div>
             <!-- Pagination -->
             {% if page_obj.has_other_pages %}
